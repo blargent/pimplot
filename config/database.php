@@ -54,10 +54,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => env('DB_USERNAME', 'forge'),
-            'password'  => env('DB_PASSWORD', ''),
+            'host'      => env('DB_HOST', 'avanti-db.cduzvpj150t7.us-east-1.rds.amazonaws.com'),
+            'database'  => env('DB_DATABASE', 'avanti_prototype'),
+            'username'  => env('DB_USERNAME', 'avanti_user'),
+            'password'  => env('DB_PASSWORD', 'if1g0hrp#'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
