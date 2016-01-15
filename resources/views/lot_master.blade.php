@@ -30,7 +30,7 @@
                     var lotNumber = clickedItem.data('lotnum');
                     var lotNotes = clickedItem.data('lotnotes');
 
-                    console.log('showLotInfo jq lotNum: ' +lotNumber);
+                    
 
                     var modal = $(this);
                     modal.find('.modal-title').text('Viewing data for Lot: ' +lotNumber);
