@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1a4ae27-7f9d-4745-a767-e8e755f138c1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/LotInfosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/LotInfosController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/lot_master.blade.php" afterPath="$PROJECT_DIR$/resources/views/lot_master.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php" afterPath="$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php" />
     </list>
     <ignored path="pimplot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,14 +71,14 @@
         <entry file="file://$PROJECT_DIR$/resources/views/lot_master.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.87881505">
-              <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+              <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <marker date="1452893509000" expanded="true" signature="926:1813" placeholder="..." />
-                <marker date="1452893509000" expanded="true" signature="938:1812" placeholder="..." />
-                <marker date="1452893509000" expanded="true" signature="939:1163" placeholder="//..." />
-                <marker date="1452893509000" expanded="true" signature="1201:1797" placeholder="..." />
-                <marker date="1452893509000" expanded="true" signature="1235:1796" placeholder="..." />
+                <marker date="1452893920000" expanded="true" signature="958:1845" placeholder="..." />
+                <marker date="1452893920000" expanded="true" signature="970:1844" placeholder="..." />
+                <marker date="1452893920000" expanded="true" signature="971:1195" placeholder="//..." />
+                <marker date="1452893920000" expanded="true" signature="1233:1829" placeholder="..." />
+                <marker date="1452893920000" expanded="true" signature="1267:1828" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -87,8 +87,8 @@
       <file leaf-file-name="lot_master_alpha.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.875">
+              <caret line="3" column="62" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -146,6 +146,7 @@
         <option value="$PROJECT_DIR$/app/StatusDefs.php" />
         <option value="$PROJECT_DIR$/app/StatusDef.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/LotInfosController.php" />
+        <option value="$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/lot_master.blade.php" />
       </list>
     </option>
@@ -670,14 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_15_205334_add_status_defs_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32315978">
@@ -712,17 +705,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.875">
+          <caret line="3" column="62" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/lot_master.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.87881505">
-          <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+          <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
           <folding>
             <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1452893509000" expanded="true" signature="926:1813" placeholder="..." />
-            <marker date="1452893509000" expanded="true" signature="938:1812" placeholder="..." />
-            <marker date="1452893509000" expanded="true" signature="939:1163" placeholder="//..." />
-            <marker date="1452893509000" expanded="true" signature="1201:1797" placeholder="..." />
-            <marker date="1452893509000" expanded="true" signature="1235:1796" placeholder="..." />
+            <marker date="1452893920000" expanded="true" signature="958:1845" placeholder="..." />
+            <marker date="1452893920000" expanded="true" signature="970:1844" placeholder="..." />
+            <marker date="1452893920000" expanded="true" signature="971:1195" placeholder="//..." />
+            <marker date="1452893920000" expanded="true" signature="1233:1829" placeholder="..." />
+            <marker date="1452893920000" expanded="true" signature="1267:1828" placeholder="..." />
           </folding>
         </state>
       </provider>

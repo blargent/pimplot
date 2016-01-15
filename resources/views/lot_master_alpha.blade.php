@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Lot Edit prototype :: major unfinished!</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -54,7 +54,7 @@
                     {{--<img src="/img/LaytonLakesSummit.jpg" name="laytonlakessummit" width="1269" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />--}}
                 {{--</p>--}}
 
-                {{ $lotmap }}
+                {{ $lotdefs }}
                 <hr>
                 {{--@foreach($lotdefs as $lotdef)--}}
                     {{--<a href="javascript:alert('lot#: {{ $lotdef->lot_num }}');" id="{{ $lotdef->lot_num }}">{{ $lotdef->lot_num }}</a>--}}
@@ -63,7 +63,7 @@
                 {{--@endforeach--}}
 
 
-                <div class="title">Laravel 5</div>
+                {{--<div class="title">Lot Edit prototype :: major unfinished!</div>--}}
             </div>
         </div>
     </body>
