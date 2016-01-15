@@ -30,7 +30,7 @@
                     var lotNumber = clickedItem.data('lotnum');
                     var lotNotes = clickedItem.data('lotnotes');
 
-                    
+
 
                     var modal = $(this);
                     modal.find('.modal-title').text('Viewing data for Lot: ' +lotNumber);
@@ -45,30 +45,26 @@
     <body>
         <div class="container">
             <img src="../img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
-            <p>
-{{--                {!! Html::image('../img/LaytonLakesSummit.jpg')  !!}--}}
-                <map name="summit_laytonlakes" id="summit_laytonlakes">
-                    @foreach($lotdefs as $lotdef)
-                        <area shape="{{ $lotdef->map_area_shape }}"
-                              coords="{{ $lotdef->map_area_coords  }}"
-                              data-lotnum="{{ $lotdef->lot_num }}"
-                              data-lotid="{{ $lotdef->id }}"
-                              data-lotnotes="{{ $lotdef->notes_temp }}"
-                              {{--data-lotnotes="{ $lotinfos->where('lot_id', '=', '$lotdef->lot_id)')  }}"--}}
-                              {{--//data-notes="{{ $lotinfos->findOrFail($lotdef->lot_num) }}"--}}
-                              {{--data-lotinfoNotes="{{ $lotinfos->notes->where('lot_num, '=', $lotdef->lot_num)  }}"--}}
-                              {{--data-lotinfoNotes="{{ $lotinfos->notes }}"--}}
-                              data-toggle="modal"
-                              data-target="#showLotInfo"
-                              class="lotShow"
-                              {{--href="javascript:alert('lot#: {{ $lotdef->lot_num }}');"--}}
-                              alt="Lot: {{ $lotdef->lot_num  }} Plan: {{ $lotdef->plan_num  }}" />
-                    @endforeach
+            <map name="summit_laytonlakes" id="summit_laytonlakes">
+                @foreach($lotdefs as $lotdef)
+                    <area shape="{{ $lotdef->map_area_shape }}"
+                          coords="{{ $lotdef->map_area_coords  }}"
+                          data-lotnum="{{ $lotdef->lot_num }}"
+                          data-lotid="{{ $lotdef->id }}"
+                          data-lotnotes="{{ $lotdef->notes_temp }}"
+                          {{--data-lotnotes="{ $lotinfos->where('lot_id', '=', '$lotdef->lot_id)')  }}"--}}
+                          {{--//data-notes="{{ $lotinfos->findOrFail($lotdef->lot_num) }}"--}}
+                          {{--data-lotinfoNotes="{{ $lotinfos->notes->where('lot_num, '=', $lotdef->lot_num)  }}"--}}
+                          {{--data-lotinfoNotes="{{ $lotinfos->notes }}"--}}
+                          data-toggle="modal"
+                          data-target="#showLotInfo"
+                          class="lotShow"
+                          {{--href="javascript:alert('lot#: {{ $lotdef->lot_num }}');"--}}
+                          alt="Lot: {{ $lotdef->lot_num  }} Plan: {{ $lotdef->plan_num  }}" />
+                @endforeach
 
 
-                </map>
-            </p>
-
+            </map>
             <div class="content">
                 {{--<p>--}}
                     {{--<img src="/img/LaytonLakesSummit.jpg" name="laytonlakessummit" width="1269" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />--}}
@@ -87,6 +83,8 @@
                 {{--<div class="title">Laravel 5</div>--}}
             </div>
         </div>
+
+    <div>
         <div class="modal fade" id="showLotInfo" tabindex="-1" role="dialog" aria-labelledby="showLotInfoLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -137,8 +135,6 @@
                 </div>
             </div>
         </div>
-        <hr>
-    <div>
         {{--{{ $lotdefs }}--}}
     </div>
     </body>
