@@ -70,13 +70,13 @@
         <entry file="file://$PROJECT_DIR$/resources/views/lot_master.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.6059246">
-              <caret line="57" column="57" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+              <caret line="57" column="112" selection-start-line="57" selection-start-column="112" selection-end-line="57" selection-end-column="112" />
               <folding>
-                <marker date="1452896844000" expanded="true" signature="1421:2238" placeholder="..." />
-                <marker date="1452896844000" expanded="true" signature="1433:2237" placeholder="..." />
-                <marker date="1452896844000" expanded="true" signature="1434:1658" placeholder="//..." />
-                <marker date="1452896844000" expanded="true" signature="1696:2222" placeholder="..." />
-                <marker date="1452896844000" expanded="true" signature="1730:2221" placeholder="..." />
+                <marker date="1452896992000" expanded="true" signature="1421:2238" placeholder="..." />
+                <marker date="1452896992000" expanded="true" signature="1433:2237" placeholder="..." />
+                <marker date="1452896992000" expanded="true" signature="1434:1658" placeholder="//..." />
+                <marker date="1452896992000" expanded="true" signature="1696:2222" placeholder="..." />
+                <marker date="1452896992000" expanded="true" signature="1730:2221" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -714,13 +714,13 @@
     <entry file="file://$PROJECT_DIR$/resources/views/lot_master.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6059246">
-          <caret line="57" column="57" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+          <caret line="57" column="112" selection-start-line="57" selection-start-column="112" selection-end-line="57" selection-end-column="112" />
           <folding>
-            <marker date="1452896844000" expanded="true" signature="1421:2238" placeholder="..." />
-            <marker date="1452896844000" expanded="true" signature="1433:2237" placeholder="..." />
-            <marker date="1452896844000" expanded="true" signature="1434:1658" placeholder="//..." />
-            <marker date="1452896844000" expanded="true" signature="1696:2222" placeholder="..." />
-            <marker date="1452896844000" expanded="true" signature="1730:2221" placeholder="..." />
+            <marker date="1452896992000" expanded="true" signature="1421:2238" placeholder="..." />
+            <marker date="1452896992000" expanded="true" signature="1433:2237" placeholder="..." />
+            <marker date="1452896992000" expanded="true" signature="1434:1658" placeholder="//..." />
+            <marker date="1452896992000" expanded="true" signature="1696:2222" placeholder="..." />
+            <marker date="1452896992000" expanded="true" signature="1730:2221" placeholder="..." />
           </folding>
         </state>
       </provider>
