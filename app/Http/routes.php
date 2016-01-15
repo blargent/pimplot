@@ -11,9 +11,41 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+/*Route::get('/', function () {
+    $lotmap = App\LotMap::latest()->get();
+    return $lotmap->toArray();
+    //return view('welcome');
+});*/
+
+Route::get('k', function() {
+    //$lotmap = App\LotMap::where('map_num', '=', 1)->get();
+    $goods = [];
+//    $lotmap = App\LotMap::findOrFail(2);
+//    $lotdefs = App\LotDef::all();
+    $goods['lotmap'] = App\LotMap::findOrFail(2);
+    $goods['lotdefs'] = App\LotDef::all();
+
+
+    //return $lotdefs->toArray();
+
+    return $goods;
 });
+
+Route::get('map', 'LotInfosController@map');
+
+Route::get('/', function () {
+    $lotmap = App\LotMap::latest()->get();
+
+
+
+
+
+    return $lotmap->toArray();
+
+    //return view('lot_master', 'map', $lotmap);
+});
+
 
 /*
 |--------------------------------------------------------------------------
