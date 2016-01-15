@@ -14,12 +14,16 @@ class LotInfosController extends Controller
     public function map() {
         $lotmap = \App\LotMap::latest()->get();
         $lotdefs = \App\LotDef::where('map_id','=', 2)->get();
+        $lotinfos = \App\LotInfo::all();
 
         //return view('lot_master', moooooo );
-        return view('lot_master')->with([
-            'lotmap' => $lotmap,
-            'lotdefs' => $lotdefs
-        ]);
+//        return view('lot_master')->with([
+//            'lotmap' => $lotmap,
+//            'lotdefs' => $lotdefs,
+//            'lotinfos' => $lotinfos
+//        ]);
+        //dd(compact('lotmap', 'lotdefs', 'lotinfos'));
+        return view('lot_master', compact('lotmap', 'lotdefs', 'lotinfos'));
 //        return 'map';
     }
 

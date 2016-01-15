@@ -10,6 +10,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
+
+
+
+            {{--@foreach($lotinfos as $lotinfo)--}}
+                {{--infos[{{ $lotinfo->id }}]['notes'] = "{{ $lotinfo->notes }}";--}}
+                    {{--infos.notes[ {{ $lotinfo->id }} ] = "{{ $lotinfo->notes }}";--}}
+            {{--@endforeach--}}
+
             $(document).ready(function() {
 // $(function() {
 //               $('.lotShow').on('click', function (e) {
@@ -42,6 +50,11 @@
                         <area shape="{{ $lotdef->map_area_shape }}"
                               coords="{{ $lotdef->map_area_coords  }}"
                               data-lotnum="{{ $lotdef->lot_num }}"
+                              data-lotid="{{ $lotdef->id }}"
+                              {{--data-lotnotes="{ $lotinfos->where('lot_id', '=', '$lotdef->lot_id)')  }}"--}}
+                              {{--//data-notes="{{ $lotinfos->findOrFail($lotdef->lot_num) }}"--}}
+                              {{--data-lotinfoNotes="{{ $lotinfos->notes->where('lot_num, '=', $lotdef->lot_num)  }}"--}}
+                              {{--data-lotinfoNotes="{{ $lotinfos->notes }}"--}}
                               data-toggle="modal"
                               data-target="#showLotInfo"
                               class="lotShow"
@@ -85,17 +98,32 @@
                                 <input type="text" class="form-control" id="lot-num">
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="control-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <label for="lot-status" class="control-label">Status:</label>
+                                <select class="form-control">
+                                    <option value="one">One</option>
+                                    <option value="two">Two</option>
+                                    <option value="three">Three</option>
+                                    <option value="four">Four</option>
+                                    <option value="five">Five</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lot-notes" class="control-label">Notes:</label>
+                                <textarea class="form-control" id="lot-notes"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
+                        <button type="button" class="btn btn-primary">Update lot data</button>
                     </div>
                 </div>
             </div>
         </div>
+        <hr>
+    <div>
+        {{ $lotinfos }}
+    </div>
     </body>
 </html>
