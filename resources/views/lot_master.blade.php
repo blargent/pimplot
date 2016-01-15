@@ -28,12 +28,14 @@
                 $('#showLotInfo').on('show.bs.modal', function(event) {
                     var clickedItem = $(event.relatedTarget);
                     var lotNumber = clickedItem.data('lotnum');
+                    var lotNotes = clickedItem.data('lotnotes');
 
                     console.log('showLotInfo jq lotNum: ' +lotNumber);
 
                     var modal = $(this);
                     modal.find('.modal-title').text('Viewing data for Lot: ' +lotNumber);
                     modal.find('.modal-body input').val(lotNumber);
+                    modal.find('.modal-body textarea#lot-notes').text(lotNotes);
                 });
             });
         </script>
@@ -51,6 +53,7 @@
                               coords="{{ $lotdef->map_area_coords  }}"
                               data-lotnum="{{ $lotdef->lot_num }}"
                               data-lotid="{{ $lotdef->id }}"
+                              data-lotnotes="{{ $lotdef->notes_temp }}"
                               {{--data-lotnotes="{ $lotinfos->where('lot_id', '=', '$lotdef->lot_id)')  }}"--}}
                               {{--//data-notes="{{ $lotinfos->findOrFail($lotdef->lot_num) }}"--}}
                               {{--data-lotinfoNotes="{{ $lotinfos->notes->where('lot_num, '=', $lotdef->lot_num)  }}"--}}
@@ -94,24 +97,37 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
+                                <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                                 <label for="lot-num" class="control-label">Lot Number:</label>
                                 <input type="text" class="form-control" id="lot-num">
                             </div>
                             <div class="form-group">
+                                <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                                 <label for="lot-status" class="control-label">Status:</label>
                                 <select class="form-control">
-                                    <option value="one">One</option>
-                                    <option value="two">Two</option>
-                                    <option value="three">Three</option>
-                                    <option value="four">Four</option>
-                                    <option value="five">Five</option>
+                                    @foreach($statusdefs as $status)
+                                        <option value="{{ $status->status_label }}">{{ $status->status_label }}  (days out: {{ $status->days_out }} )</option>
+                                    @endforeach
+
+                                    {{--<option value="one">One</option>--}}
+                                    {{--<option value="two">Two</option>--}}
+                                    {{--<option value="three">Three</option>--}}
+                                    {{--<option value="four">Four</option>--}}
+                                    {{--<option value="five">Five</option>--}}
                                 </select>
                             </div>
 
                             <div class="form-group">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 <label for="lot-notes" class="control-label">Notes:</label>
                                 <textarea class="form-control" id="lot-notes"></textarea>
                             </div>
+                            <div class="form-group">
+                                <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                                <label class="control-label">Upload image:</label>
+                            </div>
+
+
                         </form>
                     </div>
                     <div class="modal-footer">

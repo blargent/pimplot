@@ -15,6 +15,7 @@ class LotInfosController extends Controller
         $lotmap = \App\LotMap::latest()->get();
         $lotdefs = \App\LotDef::where('map_id','=', 2)->get();
         $lotinfos = \App\LotInfo::all();
+        $statusdefs = \App\StatusDef::where('build_type_id', '=', 3)->orderBy('status_order', 'DESC')->get();
 
         //return view('lot_master', moooooo );
 //        return view('lot_master')->with([
@@ -23,7 +24,7 @@ class LotInfosController extends Controller
 //            'lotinfos' => $lotinfos
 //        ]);
         //dd(compact('lotmap', 'lotdefs', 'lotinfos'));
-        return view('lot_master', compact('lotmap', 'lotdefs', 'lotinfos'));
+        return view('lot_master', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
 //        return 'map';
     }
 
