@@ -34,15 +34,19 @@ Route::get('k', function() {
 
 Route::get('map', 'LotInfosController@map');
 
+Route::get('mapa', 'LotInfosController@alpha');
+
+//Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
+
+Route::get('api/lotinfo/{lotid}', function($id) {
+    return App\LotInfo::where('lot_id', $id)->first();
+});
+
+Route::resource('lotinfos', 'LotInfosController');
+
 Route::get('/', function () {
     $lotmap = App\LotMap::latest()->get();
-
-
-
-
-
     return $lotmap->toArray();
-
     //return view('lot_master', 'map', $lotmap);
 });
 

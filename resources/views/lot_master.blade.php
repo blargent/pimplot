@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Lot Edit prototype :: major unfinished!</title>
+        <title>Lot Edit prototype</title>
 
         {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
 
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
 
         {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">--}}
         {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">--}}
@@ -19,20 +17,18 @@
 
         <script type="text/javascript">
 
-
-
             {{--@foreach($lotinfos as $lotinfo)--}}
                 {{--infos[{{ $lotinfo->id }}]['notes'] = "{{ $lotinfo->notes }}";--}}
                     {{--infos.notes[ {{ $lotinfo->id }} ] = "{{ $lotinfo->notes }}";--}}
             {{--@endforeach--}}
 
             $(document).ready(function() {
-// $(function() {
-//               $('.lotShow').on('click', function (e) {
-//                   var lotnum = $(this).attr('data-lotnum');
-//                   alert('lot #: ' +lotnum);
-//               });
-//            });
+            // $(function() {
+            //               $('.lotShow').on('click', function (e) {
+            //                   var lotnum = $(this).attr('data-lotnum');
+            //                   alert('lot #: ' +lotnum);
+            //               });
+            //            });
                 $('#showLotInfo').on('show.bs.modal', function(event) {
                     var clickedItem = $(event.relatedTarget);
                     var lotNumber = clickedItem.data('lotnum');
@@ -92,14 +88,14 @@
                             <div class="form-group">
                                 <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                                 <label for="lot-num" class="control-label">Lot Number:</label>
-                                <input type="text" class="form-control" id="lot-num">
+                                <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled">
                             </div>
                             <div class="form-group">
                                 <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                                 <label for="lot-status" class="control-label">Status:</label>
                                 <select class="form-control">
                                     @foreach($statusdefs as $status)
-                                        <option value="{{ $status->status_label }}">{{ $status->status_label }}  (days out: {{ $status->days_out }} )</option>
+                                        <option value="{{ $status->id }}">{{ $status->status_label }}  (days out: {{ $status->days_out }} )</option>
                                     @endforeach
 
                                     {{--<option value="one">One</option>--}}
