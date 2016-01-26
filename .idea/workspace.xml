@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1a4ae27-7f9d-4745-a767-e8e755f138c1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/LotInfosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/LotInfosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/LotInfo.php" afterPath="$PROJECT_DIR$/app/LotInfo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/lot_master.blade.php" afterPath="$PROJECT_DIR$/resources/views/lot_master.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php" afterPath="$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php" />
     </list>
     <ignored path="pimplot.iws" />
@@ -82,10 +76,10 @@
       <file leaf-file-name="lot_master_alpha.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3565536">
-              <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.50779104">
+              <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
               <folding>
-                <element signature="e#2594#2651#0#HTML" expanded="false" />
+                <element signature="e#2324#2381#0#HTML" expanded="false" />
                 <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
             </state>
@@ -597,7 +591,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="62" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="62" />
           <folding>
-            <element signature="e#2594#2651#0#HTML" expanded="false" />
+            <element signature="e#2324#2381#0#HTML" expanded="false" />
             <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
@@ -862,10 +856,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/lot_master_alpha.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3565536">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.50779104">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
           <folding>
-            <element signature="e#2594#2651#0#HTML" expanded="false" />
+            <element signature="e#2324#2381#0#HTML" expanded="false" />
             <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>

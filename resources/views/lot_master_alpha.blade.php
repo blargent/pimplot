@@ -15,10 +15,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        {{--@foreach($lotinfos as $lotinfo)--}}
-            {{--infos[{{ $lotinfo->id }}]['notes'] = "{{ $lotinfo->notes }}";--}}
-                {{--infos.notes[ {{ $lotinfo->id }} ] = "{{ $lotinfo->notes }}";--}}
-        {{--@endforeach--}}
         $(document).ready(function() {
             //$('#showLotInfo').on('show.bs.modal', function(event) {
             $('.lotShow').click(function(event) {
@@ -32,13 +28,12 @@
 
                 var request = $.ajax({
                     url: 'api/lotinfo/'+lotId,
-                    //dataType: "json",
                     success: function(rdata) {
-                        //$('#showLotInfoLabel').text('LSR -- Getting data...');
                         lotNotes = rdata.notes;
 
                         $('#lot-num').val(rdata.lot_num);
                         $('#lot-notes').val(lotNotes);
+                        $('#status-id').val(rdata.status_id);
 
                     }
                 });
@@ -48,13 +43,13 @@
                 });
 
                 request.fail(function( jqXHR, textStatus ) {
-                    console.log( "Request failed: " + textStatus );
+                    alert( "Whoops! There was an error: [Request failed]: " + textStatus );
                 });
 
-                var modal = $(this);
-                modal.find('.modal-title').text('Viewing data for Lot: ' +lotNumber);
-                modal.find('.modal-body input').val(lotNumber);
-                modal.find('.modal-body textarea#lot-notes').text(lotNotes);
+//                var modal = $(this);
+//                modal.find('.modal-title').text('Viewing data for Lot: ' +lotNumber);
+//                modal.find('.modal-body input').val(lotNumber);
+//                modal.find('.modal-body textarea#lot-notes').text(lotNotes);
 
 
 //                ('api/lotinfo/'+lotId, function(data) {
@@ -125,7 +120,7 @@
                         <div class="form-group">
                             <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                             <label for="lot-status" class="control-label">Status:</label>
-                            <select class="form-control">
+                            <select id="status-id" class="form-control">
                                 @foreach($statusdefs as $status)
                                     <option value="{{ $status->id }}">{{ $status->status_label }}  (days out: {{ $status->days_out }} )</option>
                                 @endforeach
@@ -143,10 +138,10 @@
                             <label for="lot-notes" class="control-label">Notes:</label>
                             <textarea class="form-control" id="lot-notes"></textarea>
                         </div>
-                        <div class="form-group">
-                            <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
-                            <label class="control-label">Upload image:</label>
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>--}}
+                            {{--<label class="control-label">Upload image:</label>--}}
+                        {{--</div>--}}
 
 
                     </form>
