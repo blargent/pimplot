@@ -44,27 +44,17 @@ class LotInfosController extends Controller
     }
 
     public function getLotInfo($id, LotInfo $lotInfo) {
-//        $lotinfo = LotInfo::where('lot_id', $id)->get();
-        $mew = $lotInfo->where('lot_id', '=', $id)->get();
-//        $lotinfo->toArray();
-//        $mew->toArray();
-        //dd($mew);
-        Log::info('mew ============: ' .$mew);
+        $lotInfoData = $lotInfo::where('lot_id', $id)->get();
+//            ->orderBy('created_at', 'desc')
+//            ->first();
+//        $lotInfoData = $lotInfo::where('lot_id', $id)->first();
+//        $lotInfoData = $lotInfo::where('lot_id', $id)->firstOrFail();
 
-//        $goo = $mew->getData();
-//        Log::info('mew ->getData() = ' .$mew->getData())
-//        Log::info('mew->notes: ' .$mew->notes);
+        return ['rdata' => $lotInfoData->last(), 'count' => $lotInfoData->count()];
+    }
 
+    public function store() {
 
-//        Log::info($lotinfo);
-//        Log::info('lotinfo->notes: ' .$lotinfo->notes);
-
-//        return Response::json(['response' => $mew]);
-
-        return ['response' => $mew];
-//        return JsonResponse::create($lotinfo);
-
-//        return $lotinfo;
     }
 
 }

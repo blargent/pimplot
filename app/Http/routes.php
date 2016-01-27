@@ -36,11 +36,11 @@ Route::get('map', 'LotInfosController@map');
 
 Route::get('mapa', 'LotInfosController@alpha');
 
-//Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
+Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
 
-Route::get('api/lotinfo/{lotid}', function($id) {
-    return App\LotInfo::where('lot_id', $id)->first();
-});
+Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
+
+Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
 
 Route::resource('lotinfos', 'LotInfosController');
 
