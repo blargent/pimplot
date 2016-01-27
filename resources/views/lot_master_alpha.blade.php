@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Lot Edit prototype</title>
-
+    {{--<meta name="token" name="token" content="{{ csrf_token() }}">--}}
+    <meta name="_token" content="{{ app('Illuminate\Encryption\Encrypter')->encrypt(csrf_token()) }}" />
     <script>
         var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, mode;
 
@@ -19,11 +20,11 @@
             $('.lotShow').click(function(event) {
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
 
-                var lotId = $(this).data('lot_id');
-                var lotNumber = $(this).data('lotnum');
+                lotId = $(this).data('lot_id');
+                lotNumber = $(this).data('lotnum');
 
                 var request = $.ajax({
-                    url: 'api/lotinfo/'+lotId,
+                    url: 'api/lotinfo/' +lotId,
                     success: function(jdata) {
                         console.log(jdata);
 
@@ -58,8 +59,41 @@
                     //$('#showLotInfoLabel').text('LSR -- No data (or error) for Lot: ' +lotNumber);
                     alert( "Whoops! There was an error (or no initial data) processing data for Lot: " +lotNumber +". Please try again. " + textStatus );
                 });
+            });
+
+            $("#modalSave").click(function() {
+//            $("#lotBox").on('submit', function(event) {
+                event.preventDefault();
+
+                //var fData = $(this).serialize();
+
+                var formData = {
+                    lot_id:     lotId,
+                    lot_num:    lotNumber,
+                    lot_notes:  $('#lot-notes').val(),
+                    lot_status: $('#status-id').val(),
+
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-XSRF-Token': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                console.log(formData);
+
+//                var saveRequest = $.ajax({
+//                    url: 'api/lotinfo/' +lotId,
+////                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+//                   success: function(sdata) {
+//                       console.log(sdata);
+//                   }
+//               });
 
             });
+
+
         });
     </script>
 
@@ -141,8 +175,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update lot data</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="modalSave">Save Lot Data</button>
                     <hr>
 
                 </div>
@@ -151,6 +185,5 @@
     </div>
     {{--{{ $lotdefs }}--}}
 </div>
-<meta name="_token" content="{!! csrf_token() !!}" />
 </body>
 </html>

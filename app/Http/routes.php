@@ -44,11 +44,11 @@ Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
 
 Route::resource('lotinfos', 'LotInfosController');
 
-Route::get('/', function () {
-    $lotmap = App\LotMap::latest()->get();
-    return $lotmap->toArray();
-    //return view('lot_master', 'map', $lotmap);
-});
+//Route::get('/', function () {
+//    $lotmap = App\LotMap::latest()->get();
+//    return $lotmap->toArray();
+//    //return view('lot_master', 'map', $lotmap);
+//});
 
 
 /*
@@ -62,6 +62,12 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+/*Route::group(['middleware' => ['web']], function () {
     //
+});*/
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
 });
