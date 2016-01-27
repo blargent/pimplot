@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Lot Edit prototype</title>
-    {{--<meta name="token" name="token" content="{{ csrf_token() }}">--}}
-    <meta name="_token" content="{{ app('Illuminate\Encryption\Encrypter')->encrypt(csrf_token()) }}" />
+    {{--<meta name="_token" content="{{ app('Illuminate\Encryption\Encrypter')->encrypt(csrf_token()) }}" />--}}
     <script>
         var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, mode;
-
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -82,7 +84,6 @@
                 });
 
                 console.log(formData);
-
 //                var saveRequest = $.ajax({
 //                    url: 'api/lotinfo/' +lotId,
 ////                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
@@ -92,8 +93,6 @@
 //               });
 
             });
-
-
         });
     </script>
 
@@ -140,7 +139,9 @@
                     <h4 class="modal-title" id="showLotInfoLabel">LSR -- Initializing...</h4>
                 </div>
                 <div class="modal-body">
+                    {{--form--}}
                     <form id="lotBox">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                             <label for="lot-num" class="control-label">Lot Number:</label>

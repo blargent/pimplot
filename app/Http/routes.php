@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Http\Request;
 
 /*Route::get('/', function () {
     $lotmap = App\LotMap::latest()->get();
@@ -34,13 +35,7 @@ Route::get('k', function() {
 
 Route::get('map', 'LotInfosController@map');
 
-Route::get('mapa', 'LotInfosController@alpha');
 
-Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
-
-Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
-
-Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
 
 Route::resource('lotinfos', 'LotInfosController');
 
@@ -67,6 +62,16 @@ Route::resource('lotinfos', 'LotInfosController');
 });*/
 
 Route::group(['middleware' => 'web'], function () {
+    Route::get('mapa', 'LotInfosController@alpha');
+
+    Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
+
+    Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
+
+    Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
+
+
+
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
