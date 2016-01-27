@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Lot Edit prototype</title>
-    {{--<meta name="_token" content="{{ app('Illuminate\Encryption\Encrypter')->encrypt(csrf_token()) }}" />--}}
     <script>
         var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, mode;
     </script>
