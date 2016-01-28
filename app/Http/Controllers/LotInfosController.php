@@ -53,7 +53,21 @@ class LotInfosController extends Controller
         return ['rdata' => $lotInfoData->last(), 'count' => $lotInfoData->count()];
     }
 
-    public function store() {
+    public function store($id, Request $request, LotInfo $lotinfo, LotDef $lotdef, LotMap $lotmap) {
+        // find and compare real lot id from lot_num, map_num (figuire out), and maybe community num?
+
+        // for now, assume lot_id is accurate (bad) TEMPORARY
+        $lotinfo = new LotInfo();
+        $lotinfo->lot_id    = $request->lot_id;
+        $lotinfo->lot_num   = $request->lot_num;
+        $lotinfo->notes     = $request->lot_notes;
+        $lotinfo->status_id = $request->lot_status;
+        $lotinfo->save();
+
+        return response(['msg' => 'success'], 200)
+            ->header('Content-Type', 'application/json');
+
+
 
     }
 

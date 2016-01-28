@@ -41,7 +41,8 @@
 
                         else {
                             mode        = 'new';
-                            lotNotes    = '', lotStatusId = 0;
+                            lotNotes    = '';
+                            lotStatusId = 0;
                             lotTitle    = 'LSR -- No data found. Ready to record data for Lot: ';
 
                         }
@@ -62,7 +63,7 @@
                 });
             });
 
-            $("#modalSave").click(function() {
+            $("#modalSave").click(function(event) {
 //            $("#lotBox").on('submit', function(event) {
                 event.preventDefault();
 
@@ -78,11 +79,24 @@
 
                 $.ajaxSetup({
                     headers: {
-                        'X-XSRF-Token': $('meta[name="_token"]').attr('content')
+                        'X-XSRF-Token': $('input[name="_token"]').val()
                     }
                 });
 
                 console.log(formData);
+
+                $.ajax({
+                    url:    'api/lotinfo/' +lotId,
+                    type:   'POST',
+                    data:   formData,
+                    success: function (pdata) {
+                        console.log('successful POST: data: ');
+                        $("#showLotInfo").modal('hide');
+                    },
+                    error: function (edata) {
+                        console.log('Error from POST: ', edata);
+                    }
+                });
 //                var saveRequest = $.ajax({
 //                    url: 'api/lotinfo/' +lotId,
 ////                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
