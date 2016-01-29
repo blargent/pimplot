@@ -7,7 +7,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, mode;
+        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -21,8 +21,9 @@
             $('.lotShow').click(function(event) {
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
 
-                lotId = $(this).data('lot_id');
-                lotNumber = $(this).data('lotnum');
+                lotId       = $(this).data('lot_id');
+                lotNumber   = $(this).data('lotnum');
+                lotPriority = $(this).data('lot_priority');
 
                 var request = $.ajax({
                     url: 'api/lotinfo/' +lotId,
@@ -36,6 +37,7 @@
                             lotNotes    = jdata.rdata.notes;
                             lotStatusId = jdata.rdata.status_id;
                             lotTitle    = 'LSR -- Data ready for Lot: ';
+//                            lotPriority = jdata.rdata.priority;
 
                         }
 
@@ -49,6 +51,7 @@
                         $('#lot-notes').val(lotNotes);
                         $('#status-id').val(lotStatusId);
                         $('#lot-history-num').val(jdata.count);
+                        $('#priority-id').val(lotPriority);
                         console.log('mode: ' +mode);
                     }
                 });
@@ -117,7 +120,7 @@
     <map name="summit_laytonlakes" id="summit_laytonlakes">
         @foreach($lotdefs as $lotdef)
             {{--<area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lotid="{{ $lotdef->id }}" data-lotnotes="{{ $lotdef->notes_temp }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />--}}
-            <area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lot_id="{{ $lotdef->id }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />
+            <area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lot_id="{{ $lotdef->id }}" data-lot_priority="{{ $lotdef->priority }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />
         @endforeach
         {{--@foreach($lotdefs as $lotdef)--}}
             {{--<area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="javascript:alert('lot#: {{ $lotdef->lot_num }}');" alt="Lot: {{ $lotdef->lot_num  }} Plan: {{ $lotdef->plan_num  }}" />--}}
@@ -159,6 +162,27 @@
                             <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                             <label for="lot-num" class="control-label">Lot Number:</label>
                             <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled">
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                            <label for="lot-priority" class="control-label">Priority:</label>
+                            <select id="priority-id" class="form-control" disabled="disabled">
+                                <option value="0" selected="selected">------------</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                {{--@foreach($lotdefs as $lotdef)--}}
+                                    {{--<option value="{{ $lotdef->priority }}">{{ $lotdef->priority }}</option>--}}
+                                {{--@endforeach--}}
+                            </select>
+                            {{--<input type="text" class="form-control" id="lot-priority" aria-disabled="true" disabled="disabled">--}}
                         </div>
                         <div class="form-group">
                             <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
