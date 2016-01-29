@@ -33,6 +33,10 @@ Route::get('k', function() {
     return $goods;
 });
 
+Route::get('/', function() {
+    return view('welcome');
+});
+
 Route::get('map', 'LotInfosController@map');
 
 
