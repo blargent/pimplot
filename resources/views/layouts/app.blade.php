@@ -61,8 +61,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="javascript:;" onclick="return msg('Login will be available next week');">Login</a></li>
-                        <li><a href="javascript:;" onclick="return msg('Register may be available soon. Assigned users active next week');">Register</a></li>
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        {{--<li><a href="{{ url('/register') }}">Register</a></li>--}}
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
