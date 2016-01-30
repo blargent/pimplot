@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Lot Edit prototype</title>
     <script>
@@ -82,7 +83,8 @@
 
                 $.ajaxSetup({
                     headers: {
-                        'X-XSRF-Token': $('input[name="_token"]').val()
+                        //'X-XSRF-Token': $('input[name="_token"]').val()
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
 

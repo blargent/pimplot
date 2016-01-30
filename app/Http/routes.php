@@ -13,11 +13,7 @@
 
 use Illuminate\Http\Request;
 
-/*Route::get('/', function () {
-    $lotmap = App\LotMap::latest()->get();
-    return $lotmap->toArray();
-    //return view('welcome');
-});*/
+use App\LotDef;
 
 Route::get('k', function() {
     //$lotmap = App\LotMap::where('map_num', '=', 1)->get();
@@ -33,27 +29,23 @@ Route::get('k', function() {
     return $goods;
 });
 
-Route::get('/', function() {
-    return view('welcome');
-});
+//Route::get('/', function() {
+//    return view('welcome');
+//});
 
 Route::get('map', 'LotInfosController@map');
 
+Route::get('defs', function(){
+   $defs = LotDef::all();
 
-Route::get('mapa', 'LotInfosController@alpha');
+    return $defs;
+});
 
-Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
-
-Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
-
+//Route::get('mapa', 'LotInfosController@alpha');
+//Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
+//Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
 
 Route::resource('lotinfos', 'LotInfosController');
-
-//Route::get('/', function () {
-//    $lotmap = App\LotMap::latest()->get();
-//    return $lotmap->toArray();
-//    //return view('lot_master', 'map', $lotmap);
-//});
 
 
 /*
@@ -72,11 +64,19 @@ Route::resource('lotinfos', 'LotInfosController');
 });*/
 
 Route::group(['middleware' => 'web'], function () {
-    Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
-
-
-
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+
+    Route::get('/', function() {
+        return view('welcome');
+    });
+
+    Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
+
+    Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
+
+    Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
+
+    Route::get('mapa', 'LotInfosController@alpha');
 });
