@@ -68,15 +68,22 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('/', function() {
-        return view('welcome');
-    });
-
     Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
 
     Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
 
     Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
 
-    Route::get('mapa', 'LotInfosController@alpha');
+    Route::get('/mapa', 'LotInfosController@alpha');
+
+    Route::get('/mapselection', function() {
+        return view('pages.map_select');
+    });
+//    Route::get('/mapselection', 'MapSelectionController@index');
+
+
+    Route::get('/', function() {
+        return view('welcome');
+    });
+
 });
