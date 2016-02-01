@@ -76,11 +76,11 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/mapa', 'LotInfosController@alpha');
 
-    Route::get('/mapselection', function() {
+    Route::get('/mapselection', ['middleware' => 'auth', function() {
         return view('pages.map_select');
-    });
-//    Route::get('/mapselection', 'MapSelectionController@index');
+    }]);
 
+    //    Route::get('/mapselection', 'MapSelectionController@index');
 
     Route::get('/', function() {
         return view('welcome');
