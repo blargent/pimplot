@@ -8,7 +8,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode;
+        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -19,7 +19,16 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.lotShow').click(function(event) {
+            $("#lotBox :input").change(function() {
+                formChanged = true;
+//                console.log('formChanged: ' +formChanged);
+            });
+            $("#lot-notes").on('change keyup', function () {
+               formChanged = true;
+//                console.log('formChanged [text]: ' +formChanged);
+            });
+
+            $('.lotShow').on('click', function(event) {
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
 
                 lotId       = $(this).data('lot_id');
@@ -29,7 +38,7 @@
                 var request = $.ajax({
                     url: 'api/lotinfo/' +lotId,
                     success: function(jdata) {
-                        console.log(jdata);
+//                        console.log(jdata);
 
                         $('#lot-num').val(lotNumber);
 
@@ -39,7 +48,6 @@
                             lotStatusId = jdata.rdata.status_id;
                             lotTitle    = 'LSR -- Data ready for Lot: ';
 //                            lotPriority = jdata.rdata.priority;
-
                         }
 
                         else {
@@ -53,7 +61,7 @@
                         $('#status-id').val(lotStatusId);
                         $('#lot-history-num').val(jdata.count);
                         $('#priority-id').val(lotPriority);
-                        console.log('mode: ' +mode);
+//                        console.log('mode: ' +mode);
                     }
                 });
 
@@ -65,9 +73,10 @@
                     //$('#showLotInfoLabel').text('LSR -- No data (or error) for Lot: ' +lotNumber);
                     alert( "Whoops! There was an error (or no initial data) processing data for Lot: " +lotNumber +". Please try again. " + textStatus );
                 });
+                event.preventDefault();
             });
 
-            $("#modalSave").click(function(event) {
+            $("#modalSave").on('click', function(event) {
 //            $("#lotBox").on('submit', function(event) {
                 event.preventDefault();
 
@@ -78,7 +87,6 @@
                     lot_num:    lotNumber,
                     lot_notes:  $('#lot-notes').val(),
                     lot_status: $('#status-id').val(),
-
                 }
 
                 $.ajaxSetup({
@@ -88,28 +96,21 @@
                     }
                 });
 
-                console.log(formData);
+//                console.log(formData);
 
                 $.ajax({
                     url:    'api/lotinfo/' +lotId,
                     type:   'POST',
                     data:   formData,
                     success: function (pdata) {
-                        console.log('successful POST: data: ');
                         $("#showLotInfo").modal('hide');
                     },
                     error: function (edata) {
-                        console.log('Error from POST: ', edata);
+//                        console.log('Error from POST: ', edata);
                     }
                 });
-//                var saveRequest = $.ajax({
-//                    url: 'api/lotinfo/' +lotId,
-////                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
-//                   success: function(sdata) {
-//                       console.log(sdata);
-//                   }
-//               });
-
+                formChanged = false;
+                event.preventDefault();
             });
         });
     </script>
@@ -136,14 +137,6 @@
 
         {{--{{ $lotmap }}--}}
         <hr>
-
-        {{--@foreach($lotdefs as $lotdef)--}}
-        {{--<a href="javascript:alert('lot#: {{ $lotdef->lot_num }}');" id="{{ $lotdef->lot_num }}">{{ $lotdef->lot_num }}</a>--}}
-        {{--<br/>--}}
-
-        {{--@endforeach--}}
-
-
         {{--<div class="title">Laravel 5</div>--}}
     </div>
 </div>
@@ -208,7 +201,7 @@
                         {{--</div>--}}
                         <div class="form-group">
                             {{--<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>--}}
-                            <label for="lot-history-num" class="control-label">Data history count for this lot: </label><a href="javascript:alert('This will display history log here');">View history log</a>
+                            <label for="lot-history-num" class="control-label">Data history count for this lot: </label>&nbsp;<a href="javascript:alert('This will display history log here');">View history log</a>
                             <input type="text" class="form-control" id="lot-history-num" aria-disabled="true" disabled="disabled">
                         </div>
 
