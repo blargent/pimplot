@@ -48,6 +48,10 @@ class LotInfosController extends Controller
         return view('lot_master_alpha', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
     }
 
+    public function buildMap($id, Request $request) {
+//        $lotmap = LotMap::where();
+    }
+
     public function getLotInfo($id, LotInfo $lotInfo) {
         $lotInfoData = $lotInfo::where('lot_id', $id)->get();
 //            ->orderBy('created_at', 'desc')

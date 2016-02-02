@@ -76,9 +76,26 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/mapa', 'LotInfosController@alpha');
 
+
+    // Going to need to update this soon to not be static!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Route::get('/mapselection', ['middleware' => 'auth', function() {
-        return view('pages.map_select');
+//        $communities = App\Community::where('id', 1)->get();
+        $communities = App\Community::all();
+
+        return view('pages.map_select', compact('communities'));
+//        return view('pages.map_select', compact('communities'));
     }]);
+
+    Route::get('api/mapselection/getcommunities/{community_id}', 'MapSelectionController@');
+
+//    Route::get('api/mapselection/subdivision/{subdivision_id}', 'MapSelectionController@buildSubdivisions');
+    Route::get('api/mapselection/getsubdivisions/{communityid}', 'MapSelectionController@buildSubdivisions');
+
+    Route::get('api/mapselection/getmaps/{subdivisionid}', 'MapSelectionController@buildMaps');
+
+//    Route::get('/mapselection', ['middleware' => 'auth', function() {
+//        return view('pages.map_select');
+//    }]);
 
     //    Route::get('/mapselection', 'MapSelectionController@index');
 
