@@ -8,7 +8,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, formChanged = false;
+        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -22,16 +22,28 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#lotBox :input").change(function() {
-                formChanged = true;
-//                console.log('formChanged: ' +formChanged);
-            });
-            $("#lot-notes").on('change keyup', function () {
-               formChanged = true;
-//                console.log('formChanged [text]: ' +formChanged);
-            });
+//            $('form').each(function(){
+//                $(this).data('serialized', $(this).serialize())
+//            }).on('change input', function(){
+//                $(this).find('#modalSave')
+//                                .prop('disabled', $(this).serialize() == $(this).data('serialized'));
+//                    })
+//                    .find('#modalSave')
+//                    .prop('disabled', true);
+
+//            $("#lotBox :input").change(function() {
+//                formChanged = true;
+//            });
+//            $("#lot-notes").on('change keyup', function () {
+//               formChanged = true;
+//            });
+//            $('#lot-verify-no-update').change(function(){
+//               formChanged = true;
+//                $('#modalSave').prop('disabled', false);
+//            });
 
             $('.lotShow').on('click', function(event) {
+//                $("#modalSave").prop('disabled', true);
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
 
                 lotId       = $(this).data('lot_id');
@@ -41,8 +53,6 @@
                 var request = $.ajax({
                     url: '/api/lotinfo/' +lotId,
                     success: function(jdata) {
-                        console.log(jdata);
-
                         $('#lot-num').val(lotNumber);
 
                         if ( (jdata.count > 0) && (jdata.rdata) ) {
@@ -90,8 +100,10 @@
                     lot_num:    lotNumber,
                     lot_notes:  $('#lot-notes').val(),
                     lot_status: $('#status-id').val(),
+                    lot_verify_no_update: $('#lot-verify-no-update').is(':checked') ? 1 : 0
                 }
-
+//                console.log(formData);
+                
                 $.ajaxSetup({
                     headers: {
                         //'X-XSRF-Token': $('input[name="_token"]').val()
@@ -114,6 +126,10 @@
                 });
                 formChanged = false;
                 event.preventDefault();
+            });
+
+            $('#showLotInfo').on('hidden.bs.modal', function(e) {
+                $('#lot-verify-no-update').prop('checked', false);
             });
         });
     </script>
@@ -143,14 +159,19 @@
                 </div>
                 <div class="modal-body">
                     {{--form--}}
-                    <form id="lotBox">
+                    <form id="lotBox" class="form-inline well">
+                    {{--<form id="lotBox" class="form-inline well">--}}
                         {{ csrf_field() }}
+
                         <div class="form-group">
+                            {{--Lot Number--}}
                             <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                             <label for="lot-num" class="control-label">Lot Number:</label>
                             <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled">
                         </div>
+
                         <div class="form-group">
+                            {{--Priority--}}
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                             <label for="lot-priority" class="control-label">Priority:</label>
                             <select id="priority-id" class="form-control" disabled="disabled">
@@ -171,7 +192,9 @@
                             </select>
                             {{--<input type="text" class="form-control" id="lot-priority" aria-disabled="true" disabled="disabled">--}}
                         </div>
+
                         <div class="form-group">
+                            {{--Status--}}
                             <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                             <label for="lot-status" class="control-label">Status:</label>
                             <select id="status-id" class="form-control">
@@ -180,9 +203,16 @@
                                     <option value="{{ $status->id }}">{{ $status->status_label }}  (days out: {{ $status->days_out }} )</option>
                                 @endforeach
                             </select>
+                            {{--Verify no status update--}}
+                            <div class="checkbox">
+                                <label for="lot-verify-no-update" class="control-label">
+                                    <input type="checkbox" id="lot-verify-no-update">Verify No Status Update
+                                </label>
+                            </div>
                         </div>
 
                         <div class="form-group">
+                            {{--Notes--}}
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             <label for="lot-notes" class="control-label">Notes:</label>
                             <textarea class="form-control" id="lot-notes"></textarea>
@@ -191,8 +221,10 @@
                             {{--<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>--}}
                             {{--<label class="control-label">Upload image:</label>--}}
                         {{--</div>--}}
+
                         <div class="form-group">
                             {{--<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>--}}
+                            {{--Data History Count--}}
                             <label for="lot-history-num" class="control-label">Data history count for this lot: </label>&nbsp;<a href="javascript:alert('This will display history log here');">View history log</a>
                             <input type="text" class="form-control" id="lot-history-num" aria-disabled="true" disabled="disabled">
                         </div>
