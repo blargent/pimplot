@@ -9,8 +9,9 @@
                     <div class="panel-body">
                         {{--<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">--}}
                         {{--<form class="form-horizontal" role="form" method="GET" action="{{ url('/mapa') }}">--}}
-                        <form class="form-horizontal" role="form" method="GET" action="{{ url('/mapa') }}">
-                            {!! csrf_field() !!}
+                        <form class="form-horizontal">
+                        {{--<form class="form-horizontal" role="form" method="GET" action="{{ url('/mapa') }}">--}}
+                        {!! csrf_field() !!}
 
 
                             <div class="form-group">
@@ -66,7 +67,7 @@
             $("#submit").prop('disabled', true);
 
             $('#community').on('change', function(e) {
-               var community_id = e.target.value;
+                var community_id = e.target.value;
                 $('#subdivision').prop('disabled', true);
                 event.preventDefault();
 //                console.log('community_id: ' +community_id);
@@ -150,23 +151,33 @@
 
             $("#submit").on('click', function(event) {
                 var map_id = $('#map').val();
-//                event.preventDefault();
-                console.log('map: ' +map_id);
+                event.preventDefault();
+//                console.log('map: ' +map_id);
                 if (map_id && map_id > 0) {
+                    console.log('Phew! submit time!');
+                    var urlGo = 'loadmap/' +map_id;
+                    console.log('preAjax send, urlGo: ' +urlGo);
                     $.ajaxSetup({
                         headers: {
-                            //'X-XSRF-Token': $('input[name="_token"]').val()
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
                     $.ajax({
                         url:    'api/mapselection/goto/' +map_id,
-                        type:   'GET',
-//                        dataType: 'json',
+                        type:   'POST',
+                        dataType: 'json',
                         success: function (pdata) {
-                            //$("#showLotInfo").modal('hide');
+                            console.log('success, entering f...');
+                            if (pdata.msg == 'proceed') {
+                                console.log('success, pdata.msg: ' +pdata.msg +'. URL TIME');
+                                window.location.replace(urlGo);
+                            }
+                            else {
+                                console.log('success, pdata.msg: SHIT!!!');
+                            }
                         },
                         error: function (pdata) {
+                            console.log('pdata ERRROR');
                         }
                     });
                 }
@@ -179,4 +190,3 @@
         }); // /document.ready
     </script>
 @endsection
-

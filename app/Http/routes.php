@@ -68,38 +68,45 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
 
-    Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
+        Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
 
-    Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
+        Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
 
-    Route::get('/mapa', 'LotInfosController@alpha');
+//    Route::get('/mapa', 'LotInfosController@alpha');
 
-
-    // Going to need to update this soon to not be static!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    Route::get('/mapselection', ['middleware' => 'auth', function() {
-//        $communities = App\Community::where('id', 1)->get();
-        $communities = App\Community::all();
-
-        return view('pages.map_select', compact('communities'));
-//        return view('pages.map_select', compact('communities'));
-    }]);
 
 //    Route::get('api/mapselection/getcommunities/{community_id}', 'MapSelectionController@');
 
 //    Route::get('api/mapselection/subdivision/{subdivision_id}', 'MapSelectionController@buildSubdivisions');
-    Route::get('api/mapselection/getsubdivisions/{communityid}', 'MapSelectionController@buildSubdivisions');
+        Route::get('api/mapselection/getsubdivisions/{communityid}', 'MapSelectionController@buildSubdivisions');
 
-    Route::get('api/mapselection/getmaps/{subdivisionid}', 'MapSelectionController@buildMaps');
+        Route::get('api/mapselection/getmaps/{subdivisionid}', 'MapSelectionController@buildMaps');
 
-    Route::get('api/mapselection/goto/{mapid}', 'LotInfosController@buildMap');
+        Route::post('api/mapselection/goto/{mapid}', 'MapSelectionController@gotoMap');
+
+        Route::get('loadmap/{mapid}', 'LotInfosController@loadMapInfos');
+
+        // Going to need to update this soon to not be static!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//    Route::get('/mapselection', ['middleware' => 'auth', function() {
+        Route::get('mapselection', function() {
+//        $communities = App\Community::where('id', 1)->get();
+            $communities = App\Community::all();
+
+            return view('pages.map_select', compact('communities'));
+        });
+
 
 //    Route::get('/mapselection', ['middleware' => 'auth', function() {
 //        return view('pages.map_select');
 //    }]);
 
-    //    Route::get('/mapselection', 'MapSelectionController@index');
+        //    Route::get('/mapselection', 'MapSelectionController@index');
+
+    });
+
 
     Route::get('/', function() {
         return view('welcome');

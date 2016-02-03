@@ -39,7 +39,7 @@
                 lotPriority = $(this).data('lot_priority');
 
                 var request = $.ajax({
-                    url: 'api/lotinfo/' +lotId,
+                    url: '/api/lotinfo/' +lotId,
                     success: function(jdata) {
                         console.log(jdata);
 
@@ -102,7 +102,7 @@
 //                console.log(formData);
 
                 $.ajax({
-                    url:    'api/lotinfo/' +lotId,
+                    url:    '/api/lotinfo/' +lotId,
                     type:   'POST',
                     data:   formData,
                     success: function (pdata) {
@@ -122,7 +122,7 @@
 </head>
 <body>
 <div class="container">
-    <img src="../img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
+    <img src="/img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
     <map name="summit_laytonlakes" id="summit_laytonlakes">
         @foreach($lotdefs as $lotdef)
             {{--<area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lotid="{{ $lotdef->id }}" data-lotnotes="{{ $lotdef->notes_temp }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />--}}

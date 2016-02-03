@@ -39,17 +39,7 @@ class LotInfosController extends Controller
         return view('lot_master', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
     }
 
-    public function alpha() {
-        $lotmap = LotMap::latest()->get();
-        $lotdefs = LotDef::where('map_id','=', 2)->get();
-        $lotinfos = LotInfo::all();
-        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('status_order', 'DESC')->get();
-
-        //dd(compact('lotmap', 'lotdefs', 'lotinfos'));
-        return view('lot_master_alpha', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
-    }
-
-    public function buildMap($id, Request $request) {
+    public function buildMap($id) {
         $lotmap     = LotMap::where('id', $id)->get();
         $lotdefs    = $lotmap->first()->lotDefs;
 
@@ -61,8 +51,19 @@ class LotInfosController extends Controller
 
         return view('lot_master_beta', compact('lotmap', 'lotdefs', 'statusdefs'));
         // return response()->view('lot_master_beta', compact('lotmap', 'lotdefs', 'statusdefs'));
+    }
 
+    public function loadMapInfos($id) {
+        $lotmap     = LotMap::where('id', $id)->get();
+        $lotdefs    = $lotmap->first()->lotDefs;
 
+        // !!!!!!!!!! Status defs are going to be dynamic based on build_type_id!!!!!!!! !!!!!!!!!
+        // !!!!!!!!!! Need to come back and figure out how to make this dynamic in modal box each time!!!
+        $statusdefs = StatusDef::where('build_type_id', 3)->orderBy('status_order', 'DESC')->get();
+//        return Redirect::route('')
+
+        return view('lot_master_beta', compact('lotmap', 'lotdefs', 'statusdefs'));
+        // return response()->view('lot_master_beta', compact('lotmap', 'lotdefs', 'statusdefs'));
     }
 
     public function getLotInfo($id, LotInfo $lotInfo) {
@@ -91,6 +92,16 @@ class LotInfosController extends Controller
 
 
 
+    }
+
+    public function alpha() {
+        $lotmap = LotMap::latest()->get();
+        $lotdefs = LotDef::where('map_id','=', 2)->get();
+        $lotinfos = LotInfo::all();
+        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('status_order', 'DESC')->get();
+
+        //dd(compact('lotmap', 'lotdefs', 'lotinfos'));
+        return view('lot_master_alpha', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
     }
 
 }
