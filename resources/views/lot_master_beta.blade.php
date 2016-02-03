@@ -103,7 +103,7 @@
                     lot_verify_no_update: $('#lot-verify-no-update').is(':checked') ? 1 : 0
                 }
 //                console.log(formData);
-                
+
                 $.ajaxSetup({
                     headers: {
                         //'X-XSRF-Token': $('input[name="_token"]').val()
@@ -159,7 +159,7 @@
                 </div>
                 <div class="modal-body">
                     {{--form--}}
-                    <form id="lotBox" class="form-inline well">
+                    <form id="lotBox">
                     {{--<form id="lotBox" class="form-inline well">--}}
                         {{ csrf_field() }}
 
