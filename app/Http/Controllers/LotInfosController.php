@@ -85,6 +85,13 @@ class LotInfosController extends Controller
         $lotinfo->lot_num   = $request->lot_num;
         $lotinfo->notes     = $request->lot_notes;
         $lotinfo->status_id = $request->lot_status;
+
+//        $lotinfo->plan_num  = $request->lot_plan_num;
+//        $lotinfo->elevation = $request->lot_elevation;
+//        $lotinfo->handing   = $request->lot_handing;
+//        $lotinfo->critical_issue_flag  = $request->lot_critical_issue_flag;
+//        $lotinfo->verify_no_update = $request->lot_verify_no_update;
+
         $lotinfo->save();
 
         return response(['msg' => 'success'], 200)
