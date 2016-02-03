@@ -42,6 +42,14 @@
 //                $('#modalSave').prop('disabled', false);
 //            });
 
+            $.ajaxSetup({
+                statusCode: {
+                    401: function(){
+                        window.location.href = "/login";
+                    }
+                }
+            });
+
             $('.lotShow').on('click', function(event) {
 //                $("#modalSave").prop('disabled', true);
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
@@ -84,7 +92,7 @@
 
                 request.fail(function( jqXHR, textStatus ) {
                     //$('#showLotInfoLabel').text('LSR -- No data (or error) for Lot: ' +lotNumber);
-                    alert( "Whoops! There was an error (or no initial data) processing data for Lot: " +lotNumber +". Please try again. " + textStatus );
+                    //alert( "Whoops! There was an error (or no initial data) processing data for Lot: " +lotNumber +". Please try again. " + textStatus );
                 });
                 event.preventDefault();
             });
