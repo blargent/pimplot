@@ -154,9 +154,7 @@
                 event.preventDefault();
 //                console.log('map: ' +map_id);
                 if (map_id && map_id > 0) {
-                    console.log('Phew! submit time!');
                     var urlGo = 'loadmap/' +map_id;
-                    console.log('preAjax send, urlGo: ' +urlGo);
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -169,20 +167,20 @@
                         success: function (pdata) {
                             console.log('success, entering f...');
                             if (pdata.msg == 'proceed') {
-                                console.log('success, pdata.msg: ' +pdata.msg +'. URL TIME');
+//                                console.log('success, pdata.msg: ' +pdata.msg +'. URL TIME');
                                 window.location.replace(urlGo);
                             }
                             else {
-                                console.log('success, pdata.msg: SHIT!!!');
+//                                console.log('success, pdata.msg: SHIT!!!');
                             }
                         },
                         error: function (pdata) {
-                            console.log('pdata ERRROR');
+//                            console.log('pdata ERRROR');
                         }
                     });
                 }
                 else {
-                    console.log('Invalid Map request, please try again');
+//                    console.log('Invalid Map request, please try again');
                     alert('Invalid Map request, please try again');
                 }
             });

@@ -125,22 +125,11 @@
     <img src="/img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
     <map name="summit_laytonlakes" id="summit_laytonlakes">
         @foreach($lotdefs as $lotdef)
-            {{--<area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lotid="{{ $lotdef->id }}" data-lotnotes="{{ $lotdef->notes_temp }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />--}}
             <area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lot_id="{{ $lotdef->id }}" data-lot_priority="{{ $lotdef->priority }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />
         @endforeach
-        {{--@foreach($lotdefs as $lotdef)--}}
-            {{--<area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="javascript:alert('lot#: {{ $lotdef->lot_num }}');" alt="Lot: {{ $lotdef->lot_num  }} Plan: {{ $lotdef->plan_num  }}" />--}}
-        {{--@endforeach--}}
-
     </map>
     <div class="content">
-        {{--<p>--}}
-        {{--<img src="/img/LaytonLakesSummit.jpg" name="laytonlakessummit" width="1269" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />--}}
-        {{--</p>--}}
-
-        {{--{{ $lotmap }}--}}
-        <hr>
-        {{--<div class="title">Laravel 5</div>--}}
+        {{--<hr>--}}
     </div>
 </div>
 
