@@ -90,7 +90,7 @@ class LotInfosController extends Controller
 //        $lotinfo->elevation = $request->lot_elevation;
 //        $lotinfo->handing   = $request->lot_handing;
 //        $lotinfo->critical_issue_flag  = $request->lot_critical_issue_flag;
-//        $lotinfo->verify_no_update = $request->lot_verify_no_update;
+        $lotinfo->verify_no_update = $request->lot_verify_no_update;
 
         $lotinfo->save();
 
