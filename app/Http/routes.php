@@ -86,12 +86,14 @@ Route::group(['middleware' => 'web'], function () {
 //        return view('pages.map_select', compact('communities'));
     }]);
 
-    Route::get('api/mapselection/getcommunities/{community_id}', 'MapSelectionController@');
+//    Route::get('api/mapselection/getcommunities/{community_id}', 'MapSelectionController@');
 
 //    Route::get('api/mapselection/subdivision/{subdivision_id}', 'MapSelectionController@buildSubdivisions');
     Route::get('api/mapselection/getsubdivisions/{communityid}', 'MapSelectionController@buildSubdivisions');
 
     Route::get('api/mapselection/getmaps/{subdivisionid}', 'MapSelectionController@buildMaps');
+
+    Route::get('api/mapselection/goto/{mapid}', 'LotInfosController@buildMap');
 
 //    Route::get('/mapselection', ['middleware' => 'auth', function() {
 //        return view('pages.map_select');

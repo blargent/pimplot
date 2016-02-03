@@ -40,10 +40,18 @@ class MapSelectionController extends Controller
     }
 
     public function buildMaps($id) {
-//    public function buildMaps($id, Request $request) {
         $maps = LotMap::where('subdivision_id', $id)->get();
 
         return ['data' => $maps, 'count' => $maps->count()];
-        //
+    }
+
+    // Let's move this to the LotInfoController instead and handle there.
+    public function goToMap() {
+        $lotmap = LotMap::latest()->get();
+        $lotdefs = LotDef::where('map_id','=', 2)->get();
+        $lotinfos = LotInfo::all();
+        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('status_order', 'DESC')->get();
+
+        return view('lot_master_alpha', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
     }
 }

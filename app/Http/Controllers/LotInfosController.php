@@ -13,6 +13,7 @@ use App\LotDef;
 use App\LotMap;
 use App\StatusDef;
 
+use Illuminate\Support\Facades\Redirect;
 use Log;
 
 class LotInfosController extends Controller
@@ -49,7 +50,19 @@ class LotInfosController extends Controller
     }
 
     public function buildMap($id, Request $request) {
-//        $lotmap = LotMap::where();
+        $lotmap     = LotMap::where('id', $id)->get();
+        $lotdefs    = $lotmap->first()->lotDefs;
+
+        // !!!!!!!!!! Status defs are going to be dynamic based on build_type_id!!!!!!!! !!!!!!!!!
+        // !!!!!!!!!! Need to come back and figure out how to make this dynamic in modal box each time!!!
+        $statusdefs = StatusDef::where('build_type_id', 3)->orderBy('status_order', 'DESC')->get();
+
+//        return Redirect::route('')
+
+        return view('lot_master_beta', compact('lotmap', 'lotdefs', 'statusdefs'));
+        // return response()->view('lot_master_beta', compact('lotmap', 'lotdefs', 'statusdefs'));
+
+
     }
 
     public function getLotInfo($id, LotInfo $lotInfo) {
