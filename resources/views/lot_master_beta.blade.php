@@ -20,6 +20,16 @@
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.11.3/jquery.min.js"></script>--}}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+    <style>
+        body {
+            padding-right: 0px !important
+        }
+        .modal-open {
+            overflow-y: auto;
+        }
+        /*i.glyph_red:before { color: red; }*/
+    </style>
+
     <script type="text/javascript">
         $(document).ready(function() {
 //            $('form').each(function(){
@@ -41,7 +51,14 @@
 //               formChanged = true;
 //                $('#modalSave').prop('disabled', false);
 //            });
-
+        $('input[id=lot-critical-issue]').on('click', function(e) {
+            if ( $(this).is(':checked') ) {
+                $('.glyphicon-exclamation-sign').css('color', 'red');
+            }
+            else {
+                $('.glyphicon-exclamation-sign').css('color', 'black');
+            }
+        });
             $.ajaxSetup({
                 statusCode: {
                     401: function(){
@@ -139,6 +156,8 @@
 
             $('#showLotInfo').on('hidden.bs.modal', function(e) {
                 $('#lot-verify-no-update').prop('checked', false);
+                $('#lot-critical-issue').prop('checked', false);
+                $('.glyphicon-exclamation-sign').css('color', 'black');
             });
         });
     </script>
@@ -178,17 +197,21 @@
                                 {{--Lot Number--}}
                                 {{--<div class="col-xs-12 col-md-8">--}}
                                     <div class="col-md-4">
-                                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-                                    <label for="lot-num" class="control-label">Lot Number:</label>
-                                {{--</div>--}}
-                                {{--<div class="col-xs-6 col-md-4">--}}
-                                    <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled" style="max-width: 60px;">
+                                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                        <label for="lot-num" class="control-label">Lot Number:</label>
+                                    {{--</div>--}}
+                                    {{--<div class="col-xs-6 col-md-4">--}}
+                                        <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled" style="max-width: 60px;">
                                     </div>
-                                    <div class="col-md-4 col-md-offset-4">
+                                    <div class="col-md-5 col-md-offset-3">
                                         {{--<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>--}}
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        {{--<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"><i class="glyph_red"></i></span>--}}
+                                        {{--<p class="text-right">--}}
+                                        <div class="pull-right">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"</span>
                                         <label for="lot-critical-issue" class="control-label">Critical Issue!&nbsp;</label>
-                                        <input type="checkbox" id="lot-critical-issue">
+                                        <input type="checkbox" id="lot-critical-issue"></div>
+                                        {{--</p>--}}
                                     </div>
                                 </div>
                             </div>
