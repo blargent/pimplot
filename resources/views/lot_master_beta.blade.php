@@ -276,43 +276,6 @@
                             <input type="text" class="form-control" id="lot-history-num" aria-disabled="true" disabled="disabled">
                         </div>
 
-                        <div class="form-group">
-                            {{--<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>--}}
-                            {{--Data History Count--}}
-                            <label for="lot-history-num" class="control-label">Data history count for this lot: </label>&nbsp;<a href="javascript:alert('This will display history log here');">View history log</a>
-                            <input type="text" class="form-control" id="lot-history-num" aria-disabled="true" disabled="disabled">
-                        </div>
-                        <div class="form-group">
-                            {{--<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>--}}
-                            {{--Data History Count--}}
-                            <label for="lot-history-num" class="control-label">Data history count for this lot: </label>&nbsp;<a href="javascript:alert('This will display history log here');">View history log</a>
-                            <input type="text" class="form-control" id="lot-history-num" aria-disabled="true" disabled="disabled">
-                        </div><br ><hr>
-                        <div class="form-group">
-                            {{--<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>--}}
-                            {{--Data History Count--}}
-                            <label for="lot-history-num" class="control-label">Data history count for this lot: </label>&nbsp;<a href="javascript:alert('This will display history log here');">View history log</a>
-                            <input type="text" class="form-control" id="lot-history-num" aria-disabled="true" disabled="disabled">
-                        </div>
-                        <div class="form-group">
-                            {{--Notes--}}
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            <label for="lot-notes" class="control-label">Notes:</label>
-                            <textarea class="form-control" id="lot-notes"></textarea>
-                        </div>
-                        <div class="form-group">
-                            {{--Notes--}}
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            <label for="lot-notes" class="control-label">Notes:</label>
-                            <textarea class="form-control" id="lot-notes"></textarea>
-                        </div>
-                        <div class="form-group">
-                            {{--Notes--}}
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            <label for="lot-notes" class="control-label">Notes:</label>
-                            <textarea class="form-control" id="lot-notes"></textarea>
-                        </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
