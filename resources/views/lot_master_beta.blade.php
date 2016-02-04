@@ -8,7 +8,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, formChanged = false;
+        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -108,7 +108,8 @@
                     lot_num:    lotNumber,
                     lot_notes:  $('#lot-notes').val(),
                     lot_status: $('#status-id').val(),
-                    lot_verify_no_update: $('#lot-verify-no-update').is(':checked') ? 1 : 0
+                    lot_verify_no_update:   $('#lot-verify-no-update').is(':checked') ? 1 : 0,
+                    lot_critical_issue:     $('#lot-critical-issue').is(':checked') ? 1 : 0
                 }
 //                console.log(formData);
 
@@ -145,7 +146,7 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <img src="/img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
     <map name="summit_laytonlakes" id="summit_laytonlakes">
         @foreach($lotdefs as $lotdef)
@@ -171,35 +172,27 @@
                     {{--<form id="lotBox" class="form-inline well">--}}
                         {{ csrf_field() }}
 
-                        <div class="form-group">
-                            {{--Lot Number--}}
-                            <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-                            <label for="lot-num" class="control-label">Lot Number:</label>
-                            <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled">
-                        </div>
-
-                        <div class="form-group">
-                            {{--Priority--}}
-                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                            <label for="lot-priority" class="control-label">Priority:</label>
-                            <select id="priority-id" class="form-control" disabled="disabled">
-                                <option value="0" selected="selected">------------</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                {{--@foreach($lotdefs as $lotdef)--}}
-                                    {{--<option value="{{ $lotdef->priority }}">{{ $lotdef->priority }}</option>--}}
-                                {{--@endforeach--}}
-                            </select>
-                            {{--<input type="text" class="form-control" id="lot-priority" aria-disabled="true" disabled="disabled">--}}
-                        </div>
+                        {{--<div class="row">--}}
+                            <div class="form-group form-inline">
+                                <div class="row">
+                                {{--Lot Number--}}
+                                {{--<div class="col-xs-12 col-md-8">--}}
+                                    <div class="col-md-4">
+                                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                    <label for="lot-num" class="control-label">Lot Number:</label>
+                                {{--</div>--}}
+                                {{--<div class="col-xs-6 col-md-4">--}}
+                                    <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled" style="max-width: 60px;">
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-4">
+                                        {{--<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>--}}
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <label for="lot-critical-issue" class="control-label">Critical Issue!&nbsp;</label>
+                                        <input type="checkbox" id="lot-critical-issue">
+                                    </div>
+                                </div>
+                            </div>
+                        {{--</div>--}}
 
                         <div class="form-group">
                             {{--Status--}}
@@ -224,6 +217,29 @@
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             <label for="lot-notes" class="control-label">Notes:</label>
                             <textarea class="form-control" id="lot-notes"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            {{--Priority--}}
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                            <label for="lot-priority" class="control-label">Priority:</label>
+                            <select id="priority-id" class="form-control" disabled="disabled">
+                                <option value="0" selected="selected">------------</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                {{--@foreach($lotdefs as $lotdef)--}}
+                                {{--<option value="{{ $lotdef->priority }}">{{ $lotdef->priority }}</option>--}}
+                                {{--@endforeach--}}
+                            </select>
+                            {{--<input type="text" class="form-control" id="lot-priority" aria-disabled="true" disabled="disabled">--}}
                         </div>
                         {{--<div class="form-group">--}}
                             {{--<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>--}}
