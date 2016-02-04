@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -89,8 +90,25 @@ class LotInfosController extends Controller
 //        $lotinfo->plan_num  = $request->lot_plan_num;
 //        $lotinfo->elevation = $request->lot_elevation;
 //        $lotinfo->handing   = $request->lot_handing;
-        $lotinfo->critical_issue_flag  = $request->lot_critical_issue;
-        $lotinfo->verify_no_update = $request->lot_verify_no_update;
+        $lotinfo->critical_issue_flag   = $request->lot_critical_issue;
+        $lotinfo->verify_no_update      = $request->lot_verify_no_update;
+        if ($request->has('lot_fv_install_date')) {
+            $lotinfo->fv_install_date = Carbon::createFromFormat('Y-m-d', $request->lot_fv_install_date);
+        }
+        else {
+            $lotinfo->fv_install_date = null;
+        }
+        if ($request->has('lot_builder_date')) {
+            $lotinfo->builder_date = Carbon::createFromFormat('Y-m-d', $request->lot_builder_date);
+        }
+        else {
+            $lotinfo->builder_date = null;
+        }
+
+//        $lotinfo->fv_install_date       = Carbon::createFromFormat('d-m-Y', $request->lot_fv_install_date);
+//        $lotinfo->builder_date          = Carbon::createFromFormat('d-m-Y', $request->lot_builder_date);
+
+        //dd($lotinfo);
 
         $lotinfo->save();
 

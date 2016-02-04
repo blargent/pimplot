@@ -8,20 +8,22 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue, formChanged = false;
+        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue, lot_fv_install_date, lot_builder_date, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    {{--<link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet">--}}
 
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>--}}
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.11.3/jquery.min.js"></script>--}}
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.11.3/jquery.min.js"></script>--}}
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-    <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    {{--<script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>--}}
 
     <style>
         body {
@@ -36,15 +38,18 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+            $('#lot-fv-install-date').datepicker();
+            $('#lot-builder-date').datepicker();
+            $('#lot-fv-install-date').datepicker("option", "dateFormat", "yy-mm-dd");
+            $('#lot-builder-date').datepicker("option", "dateFormat", "yy-mm-dd");
 
-//            $('#fv-install-date').datepicker({
-//                allowPastDates: true
+//            $('#lot-fv-install-date').datepicker("option", "dateFormat", "mm-dd-yy");
+//            $('#lot-builder-date').datepicker("option", "dateFormat", "mm-dd-yy");
+//            $('#lot-fv-install-date, #lot-builder-date').datepicker();
+
+//            $('#lot-fv-install-date, #lot-builder-date').datepicker({
+//                dateFormat: "mm-dd-yy"
 //            });
-            $('#fv-install-date').on('changed.fu.datepicker', function (evt, date) {
-                console.log('dat picker changed');
-                // do something…
-            });
-
 //            $('form').each(function(){
 //                $(this).data('serialized', $(this).serialize())
 //            }).on('change input', function(){
@@ -86,7 +91,6 @@
 //                $("#modalSave").prop('disabled', true);
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
 
-                $('#fv-install-date').datepicker();
 
                 lotId       = $(this).data('lot_id');
                 lotNumber   = $(this).data('lotnum');
@@ -102,6 +106,8 @@
                             lotNotes    = jdata.rdata.notes;
                             lotStatusId = jdata.rdata.status_id;
                             lotTitle    = 'LSR -- Data ready for Lot: ';
+                            lot_fv_install_date = jdata.rdata.fv_install_date;
+                            lot_builder_date    = jdata.rdata.builder_date;
 //                            lotPriority = jdata.rdata.priority;
                         }
 
@@ -116,6 +122,8 @@
                         $('#status-id').val(lotStatusId);
                         $('#lot-history-num').val(jdata.count);
                         $('#priority-id').val(lotPriority);
+                        $('#lot-fv-install-date').val(lot_fv_install_date);
+                        $('#lot-builder-date').val(lot_builder_date);
 //                        console.log('mode: ' +mode);
                     }
                 });
@@ -133,18 +141,19 @@
             $("#modalSave").on('click', function(event) {
 //            $("#lotBox").on('submit', function(event) {
                 event.preventDefault();
-
-                //var fData = $(this).serialize();
-
                 var formData = {
                     lot_id:     lotId,
                     lot_num:    lotNumber,
                     lot_notes:  $('#lot-notes').val(),
                     lot_status: $('#status-id').val(),
                     lot_verify_no_update:   $('#lot-verify-no-update').is(':checked') ? 1 : 0,
-                    lot_critical_issue:     $('#lot-critical-issue').is(':checked') ? 1 : 0
+                    lot_critical_issue:     $('#lot-critical-issue').is(':checked') ? 1 : 0,
+                    lot_fv_install_date:    $('#lot-fv-install-date').val(),
+                    lot_builder_date:       $('#lot-builder-date').val()
+//                    lot_fv_install_date:    $('#lot-fv-install-date').datepicker("getDate"),
+//                    lot_builder_date:       $('#lot-builder-date').datepicker("getDate")
                 }
-//                console.log(formData);
+                console.log(formData);
 
                 $.ajaxSetup({
                     headers: {
@@ -171,8 +180,9 @@
             });
 
             $('#showLotInfo').on('hidden.bs.modal', function(e) {
-                $('#lot-verify-no-update').prop('checked', false);
-                $('#lot-critical-issue').prop('checked', false);
+                $('#lot-verify-no-update, #lot-critical-issue').prop('checked', false);
+                $('#lot-fv-install-date').datepicker("setDate");
+                $('#lot-builder-date').datepicker("setDate");
                 $('.glyphicon-exclamation-sign').css('color', 'black');
             });
         });
@@ -180,7 +190,7 @@
 
 
 </head>
-<body class="fuelux">
+<body>
 <div class="container-fluid">
     <img src="/img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
     <map name="summit_laytonlakes" id="summit_laytonlakes">
@@ -258,84 +268,100 @@
                             <textarea class="form-control" id="lot-notes"></textarea>
                         </div>
 
-{{--*******************************************************************--}}
-                        <div class="input-group">
-                            <input class="form-control" id="fv-install-date" type="text"/>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                    <span class="sr-only">Toggle Calendar</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                    <div class="datepicker-calendar">
-                                        <div class="datepicker-calendar-header">
-                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous Month</span></button>
-                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next Month</span></button>
-                                            <button type="button" class="title">
-              <span class="month">
-                <span data-month="0">January</span>
-                <span data-month="1">February</span>
-                <span data-month="2">March</span>
-                <span data-month="3">April</span>
-                <span data-month="4">May</span>
-                <span data-month="5">June</span>
-                <span data-month="6">July</span>
-                <span data-month="7">August</span>
-                <span data-month="8">September</span>
-                <span data-month="9">October</span>
-                <span data-month="10">November</span>
-                <span data-month="11">December</span>
-              </span> <span class="year"></span>
-                                            </button>
-                                        </div>
-                                        <table class="datepicker-calendar-days">
-                                            <thead>
-                                            <tr>
-                                                <th>Su</th>
-                                                <th>Mo</th>
-                                                <th>Tu</th>
-                                                <th>We</th>
-                                                <th>Th</th>
-                                                <th>Fr</th>
-                                                <th>Sa</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                        <div class="datepicker-calendar-footer">
-                                            <button type="button" class="datepicker-today">Today</button>
-                                        </div>
-                                    </div>
-                                    <div class="datepicker-wheels" aria-hidden="true">
-                                        <div class="datepicker-wheels-month">
-                                            <h2 class="header">Month</h2>
-                                            <ul>
-                                                <li data-month="0"><button type="button">Jan</button></li>
-                                                <li data-month="1"><button type="button">Feb</button></li>
-                                                <li data-month="2"><button type="button">Mar</button></li>
-                                                <li data-month="3"><button type="button">Apr</button></li>
-                                                <li data-month="4"><button type="button">May</button></li>
-                                                <li data-month="5"><button type="button">Jun</button></li>
-                                                <li data-month="6"><button type="button">Jul</button></li>
-                                                <li data-month="7"><button type="button">Aug</button></li>
-                                                <li data-month="8"><button type="button">Sep</button></li>
-                                                <li data-month="9"><button type="button">Oct</button></li>
-                                                <li data-month="10"><button type="button">Nov</button></li>
-                                                <li data-month="11"><button type="button">Dec</button></li>
-                                            </ul>
-                                        </div>
-                                        <div class="datepicker-wheels-year">
-                                            <h2 class="header">Year</h2>
-                                            <ul></ul>
-                                        </div>
-                                        <div class="datepicker-wheels-footer clearfix">
-                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                        <div class="form-group">
+                            {{--JQ fv_install_date picker--}}
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <label for="lot-fv-install-date" class="control-label">FV Install Date:</label>
+                            <input class="form-control" id="lot-fv-install-date"></input>
                         </div>
+
+                        <div class="form-group">
+                            {{--JQ builder_date picker--}}
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <label for="lot-builder-date" class="control-label">Builder Date:</label>
+                            <input class="form-control" id="lot-builder-date"></input>
+                        </div>
+
+
+                        {{--*******************************************************************--}}
+                        {{--<div class="input-group">--}}
+                            {{--<input class="form-control" id="fv-install-date" type="text"/>--}}
+                            {{--<div class="input-group-btn">--}}
+                                {{--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">--}}
+                                    {{--<span class="glyphicon glyphicon-calendar"></span>--}}
+                                    {{--<span class="sr-only">Toggle Calendar</span>--}}
+                                {{--</button>--}}
+                                {{--<div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">--}}
+                                    {{--<div class="datepicker-calendar">--}}
+                                        {{--<div class="datepicker-calendar-header">--}}
+                                            {{--<button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous Month</span></button>--}}
+                                            {{--<button type="button" class="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next Month</span></button>--}}
+                                            {{--<button type="button" class="title">--}}
+              {{--<span class="month">--}}
+                {{--<span data-month="0">January</span>--}}
+                {{--<span data-month="1">February</span>--}}
+                {{--<span data-month="2">March</span>--}}
+                {{--<span data-month="3">April</span>--}}
+                {{--<span data-month="4">May</span>--}}
+                {{--<span data-month="5">June</span>--}}
+                {{--<span data-month="6">July</span>--}}
+                {{--<span data-month="7">August</span>--}}
+                {{--<span data-month="8">September</span>--}}
+                {{--<span data-month="9">October</span>--}}
+                {{--<span data-month="10">November</span>--}}
+                {{--<span data-month="11">December</span>--}}
+              {{--</span> <span class="year"></span>--}}
+                                            {{--</button>--}}
+                                        {{--</div>--}}
+                                        {{--<table class="datepicker-calendar-days">--}}
+                                            {{--<thead>--}}
+                                            {{--<tr>--}}
+                                                {{--<th>Su</th>--}}
+                                                {{--<th>Mo</th>--}}
+                                                {{--<th>Tu</th>--}}
+                                                {{--<th>We</th>--}}
+                                                {{--<th>Th</th>--}}
+                                                {{--<th>Fr</th>--}}
+                                                {{--<th>Sa</th>--}}
+                                            {{--</tr>--}}
+                                            {{--</thead>--}}
+                                            {{--<tbody></tbody>--}}
+                                        {{--</table>--}}
+                                        {{--<div class="datepicker-calendar-footer">--}}
+                                            {{--<button type="button" class="datepicker-today">Today</button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="datepicker-wheels" aria-hidden="true">--}}
+                                        {{--<div class="datepicker-wheels-month">--}}
+                                            {{--<h2 class="header">Month</h2>--}}
+                                            {{--<ul>--}}
+                                                {{--<li data-month="0"><button type="button">Jan</button></li>--}}
+                                                {{--<li data-month="1"><button type="button">Feb</button></li>--}}
+                                                {{--<li data-month="2"><button type="button">Mar</button></li>--}}
+                                                {{--<li data-month="3"><button type="button">Apr</button></li>--}}
+                                                {{--<li data-month="4"><button type="button">May</button></li>--}}
+                                                {{--<li data-month="5"><button type="button">Jun</button></li>--}}
+                                                {{--<li data-month="6"><button type="button">Jul</button></li>--}}
+                                                {{--<li data-month="7"><button type="button">Aug</button></li>--}}
+                                                {{--<li data-month="8"><button type="button">Sep</button></li>--}}
+                                                {{--<li data-month="9"><button type="button">Oct</button></li>--}}
+                                                {{--<li data-month="10"><button type="button">Nov</button></li>--}}
+                                                {{--<li data-month="11"><button type="button">Dec</button></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="datepicker-wheels-year">--}}
+                                            {{--<h2 class="header">Year</h2>--}}
+                                            {{--<ul></ul>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="datepicker-wheels-footer clearfix">--}}
+                                            {{--<button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>--}}
+                                            {{--<button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 {{--*******************************************************************--}}
 
 
