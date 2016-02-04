@@ -271,14 +271,14 @@
 
                         <div class="form-group">
                             {{--JQ fv_install_date picker--}}
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                             <label for="lot-fv-install-date" class="control-label">FV Install Date:</label>
                             <input class="form-control" id="lot-fv-install-date"></input>
                         </div>
 
                         <div class="form-group">
                             {{--JQ builder_date picker--}}
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                             <label for="lot-builder-date" class="control-label">Builder Date:</label>
                             <input class="form-control" id="lot-builder-date"></input>
                         </div>
