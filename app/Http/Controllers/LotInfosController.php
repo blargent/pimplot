@@ -24,8 +24,6 @@ class LotInfosController extends Controller
         $this->middleware('auth');
     }
 
-
-
     //
     public function map() {
         $lotmap     = LotMap::latest()->get();
