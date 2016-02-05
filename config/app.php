@@ -148,6 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
+        'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
 
         /*
          * Application Service Providers...
@@ -204,6 +205,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'DataGrid' => 'Cartalyst\DataGrid\Laravel\Facades\DataGrid',
     ],
 
 ];
