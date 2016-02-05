@@ -6,7 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class LotDef
+ *
  * @package App
+ * @property integer $id
+ * @property integer $lot_map_id
+ * @property integer $map_id
+ * @property integer $lot_num
+ * @property integer $plan_num
+ * @property integer $priority
+ * @property string $map_area_shape
+ * @property string $map_area_coords
+ * @property string $location_address
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $notes_temp
+ * @property-read \App\LotMap $map
  */
 class LotDef extends Model
 {

@@ -4,6 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\LotMap
+ *
+ * @property integer $id
+ * @property integer $map_num
+ * @property integer $subdivision_id
+ * @property string $map_name
+ * @property string $map_filename
+ * @property string $map_storage_location
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\LotDef[] $lotDefs
+ * @property-read \App\Subdivision $subdivision
+ */
 class LotMap extends Model
 {
     protected $table = 'lot_maps';
