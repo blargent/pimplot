@@ -3,10 +3,10 @@
     <% _.each(results, function(r) { %>
 
     <tr>
-        <td><%= r.country %></td>
-			<td><%= r.subdivision %></td>
-			<td><%= r.city %></td>
-			<td><%= r.population %></td>
+        <td><%= r.id %></td>
+			<td><%= r.lot_num %></td>
+			<td><%= r.status_id %></td>
+			<td><%= r.notes %></td>
 		</tr>
 
 	<% }); %>

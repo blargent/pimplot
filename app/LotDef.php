@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 /**
  * Class LotDef
  *
@@ -21,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property string $notes_temp
  * @property-read \App\LotMap $map
+ * @property integer $updated_by
  */
 class LotDef extends Model
 {
@@ -32,6 +35,12 @@ class LotDef extends Model
      */
     public function map() {
         return $this->belongsTo('App\LotMap');
+    }
+
+    public static function boot() {
+        static::updating(function ($lotdef) {
+           $lotdef->updated_by = Auth::user()-id;
+        });
     }
     //
 }

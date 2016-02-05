@@ -10,7 +10,8 @@
         "laravelcollective/html": "~5.0",
         "doctrine/dbal": "v2.5.4",
         "cartalyst/data-grid": "3.0.*",
-        "barryvdh/laravel-ide-helper": "^2.1"
+        "barryvdh/laravel-ide-helper": "^2.1",
+        "barryvdh/laravel-dompdf": "0.6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

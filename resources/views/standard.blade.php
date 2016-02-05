@@ -33,9 +33,9 @@
                 }
             });
         // Date Picker
-        $('.datePicker').datetimepicker({
-            pickTime: false
-        });
+//        $('.datePicker').datetimepicker({
+//            pickTime: false
+//        });
         /**
          * DEMO ONLY EVENTS
          */
@@ -173,8 +173,8 @@
 
                 <select name="column" class="form-control">
                     <option value="all">All</option>
-                    <option value="subdivision">Subdivision</option>
-                    <option value="city">City</option>
+                    <option value="lot_num">Lot #</option>
+                    <option value="status_id">Status ID</option>
                 </select>
 
             </div>
@@ -211,10 +211,10 @@
 
                 <thead>
                 <tr>
-                    <th class="sortable col-md-4" data-grid="standard" data-sort="country">Country</th>
-                    <th class="sortable col-md-3" data-grid="standard" data-sort="subdivision">Subdivision</th>
-                    <th class="sortable col-md-3" data-grid="standard" data-sort="city">City</th>
-                    <th class="sortable col-md-2" data-grid="standard" data-sort="population">Population</th>
+                    <th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>
+                    <th class="sortable col-md-3" data-grid="standard" data-sort="lot_num">Lot #</th>
+                    <th class="sortable col-md-3" data-grid="standard" data-sort="status_id">Status ID</th>
+                    <th class="sortable col-md-2" data-grid="standard" data-sort="notes">Notes</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

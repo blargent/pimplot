@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property integer $role_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\LotInfo[] $lotinfo
  */
 class User extends Authenticatable
 {
@@ -35,4 +36,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function lotinfo() {
+        return $this->hasMany('App\LotInfo');
+    }
 }

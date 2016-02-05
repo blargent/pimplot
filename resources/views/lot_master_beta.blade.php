@@ -265,8 +265,6 @@
                             <textarea class="form-control" id="lot-notes"></textarea>
                         </div>
 
-                        checkbox
-
                         <div class="form-group">
                             {{--JQ fv_install_date picker--}}
                             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserIdToLotInfosTable extends Migration
+class AddUpdatedByToLotDefs extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddUserIdToLotInfosTable extends Migration
      */
     public function up()
     {
-        Schema::table('lot_infos', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->nullable()->after('notes');
+        Schema::table('lot_defs', function (Blueprint $table) {
+            $table->integer('updated_by')->unsigned()->nullable()->after('updated_at');
             //
         });
     }
@@ -25,7 +25,7 @@ class AddUserIdToLotInfosTable extends Migration
      */
     public function down()
     {
-        Schema::table('lot_infos', function (Blueprint $table) {
+        Schema::table('lot_defs', function (Blueprint $table) {
             //
         });
     }

@@ -17,6 +17,8 @@ use App\StatusDef;
 use Illuminate\Support\Facades\Redirect;
 use Log;
 
+use Auth;
+
 class LotInfosController extends Controller
 {
 
@@ -74,12 +76,13 @@ class LotInfosController extends Controller
 
     public function store($id, Request $request, LotInfo $lotinfo, LotDef $lotdef, LotMap $lotmap) {
         // find and compare real lot id from lot_num, map_num (figuire out), and maybe community num?
+        $user = Auth::id();
 
-        // for now, assume lot_id is accurate (bad) TEMPORARY
         $lotinfo            = new LotInfo();
         $lotinfo->lot_id    = $request->lot_id;
         $lotinfo->lot_num   = $request->lot_num;
         $lotinfo->notes     = $request->lot_notes;
+        $lotinfo->user_id = $user;
         $lotinfo->status_id = $request->lot_status;
 //        $lotinfo->plan_num  = $request->lot_plan_num;
 //        $lotinfo->elevation = $request->lot_elevation;

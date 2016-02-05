@@ -69,6 +69,38 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     Route::group(['middleware' => 'auth'], function() {
+        Route::get('standard', function() {
+           return view('standard');
+        });
+
+        Route::get('source', function()
+        {
+            $columns = array(
+                'id',
+//                'lot_id',
+                'lot_num',
+                'status_id',
+//                'build_type_id',
+//                'critical_issue_flag',
+//                'verify_no_update',
+                'notes',
+//                'created_at'
+            );
+            $settings = array(
+                'sort'        => 'status_id',
+                'direction'   => 'asc',
+                'max_results' => 50,
+            );
+            // // Initiate by a database query
+            // return DataGrid::make(DB::table('cities'), $columns, $settings);
+            // // Or by an Eloquent model query
+            // return DataGrid::make(with(new City)->newQuery(), $columns, $settings);
+            // Or by an Eloquent model
+            return DataGrid::make(new App\LotInfo, $columns, $settings);
+        });
+
+
+
         Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
 
         Route::put('api/lotinfo/{lotid}', 'LotInfosController@store');
