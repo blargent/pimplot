@@ -10,8 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-use Illuminate\Http\Request;
+use App\Http\Requests;
+//use Illuminate\Http\Request;
 
 use App\LotDef;
 
@@ -90,7 +90,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('loadmap/{mapid}', 'LotInfosController@loadMapInfos');
 
         // Going to need to update this soon to not be static!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    Route::get('/mapselection', ['middleware' => 'auth', function() {
         Route::get('mapselection', function() {
 //        $communities = App\Community::where('id', 1)->get();
             $communities = App\Community::all();
@@ -98,14 +97,13 @@ Route::group(['middleware' => 'web'], function () {
             return view('pages.map_select', compact('communities'));
         });
 
+        Route::get('report', 'ReportController@index');
 
-//    Route::get('/mapselection', ['middleware' => 'auth', function() {
-//        return view('pages.map_select');
-//    }]);
-
-        //    Route::get('/mapselection', 'MapSelectionController@index');
 
     });
+/*    Route::get('token', function () {
+        return csrf_token();
+    });*/
 
 
     Route::get('/', function() {

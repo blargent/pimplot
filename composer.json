@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "~5.0",
-        "doctrine/dbal": "v2.5.4"
+        "doctrine/dbal": "v2.5.4",
+        "cartalyst/data-grid": "3.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -17,6 +18,12 @@
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.cartalyst.com"
+        }
+    ],
     "autoload": {
         "classmap": [
             "database"
