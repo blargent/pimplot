@@ -21,6 +21,10 @@
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="{{ URL::asset('assets/cartalyst/data-grid/js/underscore.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/cartalyst/data-grid/js/data-grid.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/moment.js') }}"></script>
+
 </head>
 <body id="report-layout">
     <nav class="navbar navbar-default">

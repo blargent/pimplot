@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
         'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -13,8 +13,9 @@ use App\LotInfo;
 
 class ReportController extends Controller
 {
-    public function index()
-    {
+    public function index() {
+        $data = LotInfo::all();
+
         return view('reports.dgrid1');
     }
 }

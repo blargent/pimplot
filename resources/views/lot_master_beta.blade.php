@@ -124,7 +124,6 @@
                         $('#priority-id').val(lotPriority);
                         $('#lot-fv-install-date').val(lot_fv_install_date);
                         $('#lot-builder-date').val(lot_builder_date);
-//                        console.log('mode: ' +mode);
                     }
                 });
 
@@ -161,8 +160,6 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
-//                console.log(formData);
 
                 $.ajax({
                     url:    '/api/lotinfo/' +lotId,
@@ -268,6 +265,7 @@
                             <textarea class="form-control" id="lot-notes"></textarea>
                         </div>
 
+                        checkbox
 
                         <div class="form-group">
                             {{--JQ fv_install_date picker--}}
