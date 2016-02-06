@@ -61,9 +61,9 @@
 
 <div class="page-header">
 
-    <h1>Standard Pagination</h1>
+    <h1>Lot Info Report :: Raw LotInfo Data</h1>
 
-    <p class="lead">Filtering and paginating data has never been easier.</p>
+    <p class="lead">Now that lot info data is successfully being pulled from database and displayed, the reports will be here post haste. Feel free to click on a column header to sort by that column, again to reverse direction.</p>
 
 </div>
 
@@ -211,10 +211,20 @@
 
                 <thead>
                 <tr>
-                    <th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>
-                    <th class="sortable col-md-3" data-grid="standard" data-sort="lot_num">Lot #</th>
-                    <th class="sortable col-md-3" data-grid="standard" data-sort="status_id">Status ID</th>
-                    <th class="sortable col-md-2" data-grid="standard" data-sort="notes">Notes</th>
+                    {{--<th class="sortable" data-grid="standard" data-sort="id">ID</th>--}}
+                    <th class="sortable" data-grid="standard" data-sort="lot_num">Lot #</th>
+                    <th class="sortable" data-grid="standard" data-sort="status_id">Status ID</th>
+                    <th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>
+                    <th class="sortable" data-grid="standard" data-sort="critical_issue_flag">Critical Issue</th>
+                    <th class="sortable" data-grid="standard" data-sort="verify_no_update">No Update Checked</th>
+                    <th class="sortable" data-grid="standard" data-sort="notes">Notes</th>
+                    <th class="sortable" data-grid="standard" data-sort="created_at">Last Updated</th>
+
+                    {{--<th class="sortable" data-grid="standard" data-sort="notes">Notes</th>--}}
+                    {{--<th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>--}}
+                    {{--<th class="sortable col-md-3" data-grid="standard" data-sort="lot_num">Lot #</th>--}}
+                    {{--<th class="sortable col-md-3" data-grid="standard" data-sort="status_id">Status ID</th>--}}
+                    {{--<th class="sortable col-md-2" data-grid="standard" data-sort="notes">Notes</th>--}}
                 </tr>
                 </thead>
                 <tbody></tbody>

@@ -150,6 +150,7 @@ return [
         'Collective\Html\HtmlServiceProvider',
         'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -207,6 +208,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'DataGrid' => 'Cartalyst\DataGrid\Laravel\Facades\DataGrid',
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

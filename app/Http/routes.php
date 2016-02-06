@@ -76,21 +76,24 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('source', function()
         {
             $columns = array(
-                'id',
+//                'id',
 //                'lot_id',
                 'lot_num',
                 'status_id',
-//                'build_type_id',
-//                'critical_issue_flag',
-//                'verify_no_update',
+                'build_type_id',
+                'critical_issue_flag',
+                'verify_no_update',
                 'notes',
-//                'created_at'
+                'created_at'
             );
             $settings = array(
                 'sort'        => 'status_id',
                 'direction'   => 'asc',
                 'max_results' => 50,
             );
+
+//            $sdata = new App\LotInfo::where()
+
             // // Initiate by a database query
             // return DataGrid::make(DB::table('cities'), $columns, $settings);
             // // Or by an Eloquent model query
