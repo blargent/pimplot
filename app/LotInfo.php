@@ -39,5 +39,9 @@ class LotInfo extends Model
     public function user() {
         return $this->belongsTo('App\User');
     }
+
+    public function status() {
+        return $this->belongsTo('App\StatusDef');
+    }
     //
 }

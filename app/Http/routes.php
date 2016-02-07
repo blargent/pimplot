@@ -84,7 +84,8 @@ Route::group(['middleware' => 'web'], function () {
                 'critical_issue_flag',
                 'verify_no_update',
                 'notes',
-                'created_at'
+                'created_at',
+                'user_id',
             );
             $settings = array(
                 'sort'        => 'status_id',
@@ -92,14 +93,15 @@ Route::group(['middleware' => 'web'], function () {
                 'max_results' => 50,
             );
 
-//            $sdata = new App\LotInfo::where()
+            $data = App\LotInfo::with('user', 'status');
 
             // // Initiate by a database query
             // return DataGrid::make(DB::table('cities'), $columns, $settings);
             // // Or by an Eloquent model query
             // return DataGrid::make(with(new City)->newQuery(), $columns, $settings);
             // Or by an Eloquent model
-            return DataGrid::make(new App\LotInfo, $columns, $settings);
+            return DataGrid::make($data, $columns, $settings);
+//            return DataGrid::make(new App\LotInfo, $columns, $settings);
         });
 
 

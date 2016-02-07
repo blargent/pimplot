@@ -219,6 +219,7 @@
                     <th class="sortable" data-grid="standard" data-sort="verify_no_update">No Update Checked</th>
                     <th class="sortable" data-grid="standard" data-sort="notes">Notes</th>
                     <th class="sortable" data-grid="standard" data-sort="created_at">Last Updated</th>
+                    <th class="sortable" data-grid="standard" data-sort="user_id.name">User</th>
 
                     {{--<th class="sortable" data-grid="standard" data-sort="notes">Notes</th>--}}
                     {{--<th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>--}}
