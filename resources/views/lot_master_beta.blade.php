@@ -247,7 +247,8 @@
                             <select id="status-id" class="form-control">
                                 <option value="0" selected="selected">------------</option>
                                 @foreach($statusdefs as $status)
-                                    <option value="{{ $status->id }}">{{ $status->status_label }}  (days out: {{ $status->days_out }} )</option>
+                                    <option value="{{ $status->id }}">{{ $status->label }}  (duration (days)): {{ $status->days_duration }} )</option>
+                                    {{--<option value="{{ $status->id }}">{{ $status->status_label }}  (days ou: {{ $status->days_out }} )</option>--}}
                                 @endforeach
                             </select>
                             {{--Verify no status update--}}

@@ -42,7 +42,7 @@ class Subdivision extends Model
         return $this->hasMany('App\LotMap');
     }
 
-    public function lotDefs() {
+    public function lotdef() {
         return $this->hasManyThrough('App\LotDef', 'App\LotMap');
     }
 }

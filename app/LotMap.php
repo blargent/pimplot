@@ -26,9 +26,13 @@ class LotMap extends Model
      * A Lot Map has many Lot Defs
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lotDefs() {
+    public function lotdef() {
         return $this->hasMany('App\LotDef');
     }
+
+//    public function lotinfo() {
+//        return $this->hasManyThrough('App\LotInfo', 'App\LotDef');
+//    }
 
     /**
      * A Lot Map belongs to a Subdivision

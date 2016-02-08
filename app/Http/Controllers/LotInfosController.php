@@ -31,7 +31,7 @@ class LotInfosController extends Controller
         $lotmap     = LotMap::latest()->get();
         $lotdefs    = LotDef::where('map_id', '=', 2)->get();
         $lotinfos   = LotInfo::all();
-        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('status_order', 'DESC')->get();
+        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('order', 'DESC')->get();
 
         return view('lot_master', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));
     }
@@ -42,7 +42,7 @@ class LotInfosController extends Controller
 
         // !!!!!!!!!! Status defs are going to be dynamic based on build_type_id!!!!!!!! !!!!!!!!!
         // !!!!!!!!!! Need to come back and figure out how to make this dynamic in modal box each time!!!
-        $statusdefs = StatusDef::where('build_type_id', 3)->orderBy('status_order', 'DESC')->get();
+        $statusdefs = StatusDef::where('build_type_id', 3)->orderBy('order', 'DESC')->get();
 
 //        return Redirect::route('')
 
@@ -56,7 +56,7 @@ class LotInfosController extends Controller
 
         // !!!!!!!!!! Status defs are going to be dynamic based on build_type_id!!!!!!!! !!!!!!!!!
         // !!!!!!!!!! Need to come back and figure out how to make this dynamic in modal box each time!!!
-        $statusdefs = StatusDef::where('build_type_id', 3)->orderBy('status_order', 'DESC')->get();
+        $statusdefs = StatusDef::where('build_type_id', 3)->orderBy('order', 'DESC')->get();
 
 //        return Redirect::route('')
 
@@ -118,7 +118,7 @@ class LotInfosController extends Controller
         $lotmap     = LotMap::latest()->get();
         $lotdefs    = LotDef::where('map_id', '=', 2)->get();
         $lotinfos   = LotInfo::all();
-        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('status_order', 'DESC')->get();
+        $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('order', 'DESC')->get();
 
         //dd(compact('lotmap', 'lotdefs', 'lotinfos'));
         return view('lot_master_alpha', compact('lotmap', 'lotdefs', 'lotinfos', 'statusdefs'));

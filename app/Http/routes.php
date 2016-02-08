@@ -79,28 +79,56 @@ Route::group(['middleware' => 'web'], function () {
 //                'id',
 //                'lot_id',
                 'lot_num',
-                'status_id',
                 'build_type_id',
                 'critical_issue_flag',
                 'verify_no_update',
                 'notes',
                 'created_at',
+                'status_id',
                 'user_id',
             );
             $settings = array(
-                'sort'        => 'status_id',
+                'sort'        => 'lot_num',
                 'direction'   => 'asc',
                 'max_results' => 50,
             );
+            // Status
+//            $columnss = array(
+//                'lot_num',
+//                'build_type_id',
+//                'critical_issue_flag',
+//                'verify_no_update',
+//                'notes',
+//                'created_at',
+//                'status_id',
+//            );
+//            $settingss = array(
+//                'sort'        => 'lot_num',
+//                'direction'   => 'asc',
+//                'max_results' => 50,
+//            );
 
-            $data = App\LotInfo::with('user', 'status');
+            $relations = ['statusdef'];
+            $relationsu = ['user'];
+            $relate = ['statusdef', 'user'];
+
+//            $datab = App\LotInfo::wi
+//            dd($data);
+//            $adata = App\StatusDef::with()
+
+//            $data = App\LotInfo::with($relations);
+            $data = App\LotInfo::with($relate);
 
             // // Initiate by a database query
-            // return DataGrid::make(DB::table('cities'), $columns, $settings);
+//             return DataGrid::make(DB::table('cities'), $columns, $settings);
             // // Or by an Eloquent model query
             // return DataGrid::make(with(new City)->newQuery(), $columns, $settings);
             // Or by an Eloquent model
+
+//            dd(DataGrid::make($data, $columns, $settings)->toArray());
             return DataGrid::make($data, $columns, $settings);
+
+//            return DataGrid::make(new \App\LotInfo())
 //            return DataGrid::make(new App\LotInfo, $columns, $settings);
         });
 

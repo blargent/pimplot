@@ -37,6 +37,10 @@ class LotDef extends Model
         return $this->belongsTo('App\LotMap');
     }
 
+    public function lotinfo() {
+        return $this->hasMany('App\LotInfo');
+    }
+
     public static function boot() {
         static::updating(function ($lotdef) {
            $lotdef->updated_by = Auth::user()-id;
