@@ -73,7 +73,9 @@ Route::group(['middleware' => 'web'], function () {
            return view('standard');
         });
 
-        Route::get('report', 'ReportController@index');
+        Route::get('report', function() {
+            return view('standard');
+        });
 //        Route::get('report', 'ReportController@index');
 
         Route::get('source', function()

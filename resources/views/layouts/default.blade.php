@@ -47,15 +47,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ URL::to('/') }}">Reports</a>
+            <a class="navbar-brand" href="{{ URL::to('/report') }}">Reports</a>
         </div>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 <li {{ Request::is('/') ? 'class="active"' : null }}><a href="{{ URL::to('/') }}">Home</a></li>
-                <li {{ Request::is('standard') ? 'class="active"' : null }}><a href="{{ URL::to('standard') }}">Standard</a></li>
-                <li {{ Request::is('infinite') ? 'class="active"' : null }}><a href="{{ URL::to('infinite') }}">By Status</a></li>
-                <li {{ Request::is('group') ? 'class="active"' : null }}><a href="{{ URL::to('group') }}">By something soon</a></li>
+                <li {{ Request::is('standard') ? 'class="active"' : null }}><a href="{{ URL::to('standard') }}">Raw Data</a></li>
+                <li {{ Request::is('infinite') ? 'class="active"' : null }}><a href="javascript:alert('Report by Status will be here soon');">By Status (soon)</a></li>
+                <li {{ Request::is('group') ? 'class="active"' : null }}><a href="javascript:alert('Report by Location tag will be here soon');">By location (soon)</a></li>
+                {{--<li {{ Request::is('infinite') ? 'class="active"' : null }}><a href="{{ URL::to('infinite') }}">By Status (soon)</a></li>--}}
+                {{--<li {{ Request::is('group') ? 'class="active"' : null }}><a href="{{ URL::to('group') }}">By location (soon)</a></li>--}}
             </ul>
 
         </div>

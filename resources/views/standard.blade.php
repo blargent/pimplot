@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 @parent
-: Standard
+: Raw Data
 @stop
 
 {{-- Inline styles --}}
