@@ -99,6 +99,7 @@ Route::group(['middleware' => 'web'], function () {
                 'sort'        => 'lot_num',
                 'direction'   => 'asc',
                 'max_results' => 50,
+                'throttle'    => 20,
             );
             // Status
 //            $columnss = array(

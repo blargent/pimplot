@@ -166,7 +166,7 @@
                 <select name="column" class="form-control">
                     <option value="all">All</option>
                     <option value="lot_num">Lot #</option>
-                    <option value="status_id">Status ID</option>
+                    <option value="status_id.name">Status</option>
                 </select>
 
             </div>
@@ -209,7 +209,7 @@
 
                     <th class="sortable" data-grid="standard" data-sort="lot_num">Lot #</th>
                     <th class="sortable" data-grid="standard" data-sort="lot_name">Lot name</th>
-                    <th class="sortable" data-grid="standard" data-sort="statusdef.name">Status</th>
+                    <th class="sortable" data-grid="standard" data-sort="status_id">Status</th>
                     <th class="sortable" data-grid="standard" data-sort="critical_issue_flag">Critical Issue</th>
                     {{--Plan # goes here--}}
                     {{--Elevation goes here--}}
@@ -229,7 +229,7 @@
                     <th class="sortable" data-grid="standard" data-sort="created_at">Last Updated</th>
                     <th class="sortable" data-grid="standard" data-sort="verify_no_update">No Update Flag</th>
 
-                    <th class="sortable" data-grid="standard" data-sort="user_id.name">Updated By</th>
+                    <th class="sortable" data-grid="standard" data-sort="user_id">Updated By</th>
 
                     {{--<th class="sortable" data-grid="standard" data-sort="notes">Notes</th>--}}
                     {{--<th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>--}}
