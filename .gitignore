@@ -6,3 +6,4 @@ Homestead.json
 .idea/*
 .idea/
 /.idea
+/framework/sessions/*

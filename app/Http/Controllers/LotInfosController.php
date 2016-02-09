@@ -52,7 +52,7 @@ class LotInfosController extends Controller
 
     public function loadMapInfos($id) {
         $lotmap  = LotMap::where('id', $id)->get();
-        $lotdefs = $lotmap->first()->lotDefs;
+        $lotdefs = $lotmap->first()->lotdef;
 
         // !!!!!!!!!! Status defs are going to be dynamic based on build_type_id!!!!!!!! !!!!!!!!!
         // !!!!!!!!!! Need to come back and figure out how to make this dynamic in modal box each time!!!
@@ -81,6 +81,12 @@ class LotInfosController extends Controller
         $lotinfo            = new LotInfo();
         $lotinfo->lot_id    = $request->lot_id;
         $lotinfo->lot_num   = $request->lot_num;
+        if ($request->has('lot_name')) {
+            $lotinfo->lot_name = $request->lot_name;
+        } else {
+            $lotinfo->lot_name = $lotinfo->lot_num;
+        }
+        $lotinfo->lot_name  = $request->lot_name;
         $lotinfo->notes     = $request->lot_notes;
         $lotinfo->user_id = $user;
         $lotinfo->status_id = $request->lot_status;

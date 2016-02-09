@@ -73,18 +73,24 @@ Route::group(['middleware' => 'web'], function () {
            return view('standard');
         });
 
+        Route::get('report', 'ReportController@index');
+//        Route::get('report', 'ReportController@index');
+
         Route::get('source', function()
         {
             $columns = array(
 //                'id',
 //                'lot_id',
                 'lot_num',
-                'build_type_id',
-                'critical_issue_flag',
-                'verify_no_update',
-                'notes',
-                'created_at',
+                'lot_name',
                 'status_id',
+                'verify_no_update',
+                'critical_issue_flag',
+                'build_type_id',
+                'notes',
+                'builder_date',
+                'adjust_date_to',
+                'created_at',
                 'user_id',
             );
             $settings = array(
@@ -108,16 +114,20 @@ Route::group(['middleware' => 'web'], function () {
 //                'max_results' => 50,
 //            );
 
-            $relations = ['statusdef'];
-            $relationsu = ['user'];
-            $relate = ['statusdef', 'user'];
+            $relations      = ['statusdef'];
+            $relationsu     = ['user'];
+            $relate         = ['statusdef', 'user', 'buildtype'];
+//            $relatetest     = []
 
-//            $datab = App\LotInfo::wi
-//            dd($data);
-//            $adata = App\StatusDef::with()
-
-//            $data = App\LotInfo::with($relations);
+//            $data = App\LotInfo::with([ 'statusdef' => function($query) {
+//                $query->orderBy('created_at', 'desc')
+//                    ->take(1)->get();
+//            } ]);
             $data = App\LotInfo::with($relate);
+
+
+
+//            $sdata = $data->
 
             // // Initiate by a database query
 //             return DataGrid::make(DB::table('cities'), $columns, $settings);
@@ -128,11 +138,8 @@ Route::group(['middleware' => 'web'], function () {
 //            dd(DataGrid::make($data, $columns, $settings)->toArray());
             return DataGrid::make($data, $columns, $settings);
 
-//            return DataGrid::make(new \App\LotInfo())
 //            return DataGrid::make(new App\LotInfo, $columns, $settings);
         });
-
-
 
         Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
 
@@ -141,10 +148,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
 
 //    Route::get('/mapa', 'LotInfosController@alpha');
-
-
 //    Route::get('api/mapselection/getcommunities/{community_id}', 'MapSelectionController@');
-
 //    Route::get('api/mapselection/subdivision/{subdivision_id}', 'MapSelectionController@buildSubdivisions');
         Route::get('api/mapselection/getsubdivisions/{communityid}', 'MapSelectionController@buildSubdivisions');
 
@@ -161,8 +165,6 @@ Route::group(['middleware' => 'web'], function () {
 
             return view('pages.map_select', compact('communities'));
         });
-
-        Route::get('report', 'ReportController@index');
 
 
     });

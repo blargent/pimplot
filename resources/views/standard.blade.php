@@ -60,15 +60,11 @@
 </div>
 
 <div class="page-header">
-
     <h1>Lot Info Report :: Raw LotInfo Data</h1>
-
     <p class="lead">Now that lot info data is successfully being pulled from database and displayed, the reports will be here post haste. Feel free to click on a column header to sort by that column, again to reverse direction.</p>
-
 </div>
 
 <div class="row">
-
     {{-- Filters button --}}
     {{--<div class="col-md-1">--}}
 
@@ -87,14 +83,10 @@
                 {{--<li><a href="#" data-grid="standard" data-filter="population:<:5000">Populations < 5000</a></li>--}}
                 {{--<li><a href="#" data-grid="standard" data-filter="country:United States, subdivision:washington, population:<:5000" data-label="country:Country:United States, subdivision:Subdivision:Washington, population:Population:5000">Washington, United States < 5000</a></li>--}}
             {{--</ul>--}}
-
         {{--</div>--}}
-
     {{--</div>--}}
-
     {{-- Export button --}}
     <div class="col-md-1">
-
         <div class="btn-group">
 
             <button name="export" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -212,14 +204,32 @@
                 <thead>
                 <tr>
                     {{--<th class="sortable" data-grid="standard" data-sort="id">ID</th>--}}
+
+                    {{--Priority needs to go here--}}
+
                     <th class="sortable" data-grid="standard" data-sort="lot_num">Lot #</th>
-                    <th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>
+                    <th class="sortable" data-grid="standard" data-sort="lot_name">Lot name</th>
+                    <th class="sortable" data-grid="standard" data-sort="statusdef.name">Status</th>
                     <th class="sortable" data-grid="standard" data-sort="critical_issue_flag">Critical Issue</th>
-                    <th class="sortable" data-grid="standard" data-sort="verify_no_update">No Update Checked</th>
+                    {{--Plan # goes here--}}
+                    {{--Elevation goes here--}}
+                    {{--Handing goes here--}}
+                    {{--Order num goes here--}}
+
+                    <th class="sortable" data-grid="standard" data-sort="build_type_id.label">Build Type</th>
+
+                    {{--<th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>--}}
+                    {{--FV_INSTALL_DATE goes here--}}
+                    {{--BUILDER_DATE goes here--}}
+                    {{--DAYS_OUT goes here--}}
+                    {{--EARLIEST_POSSIBLE_DATE goes here?--}}
                     <th class="sortable" data-grid="standard" data-sort="notes">Notes</th>
+                    <th class="sortable" data-grid="standard" data-sort="builder_date">Builder Date</th>
+                    <th class="sortable" data-grid="standard" data-sort="adjust_date_to">Adjust Date To</th>
                     <th class="sortable" data-grid="standard" data-sort="created_at">Last Updated</th>
-                    <th class="sortable" data-grid="standard" data-sort="user_id.name">User</th>
-                    <th class="sortable" data-grid="standard" data-sort="status_id.name">Status</th>
+                    <th class="sortable" data-grid="standard" data-sort="verify_no_update">No Update Flag</th>
+
+                    <th class="sortable" data-grid="standard" data-sort="user_id.name">Updated By</th>
 
                     {{--<th class="sortable" data-grid="standard" data-sort="notes">Notes</th>--}}
                     {{--<th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>--}}

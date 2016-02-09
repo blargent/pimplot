@@ -8,7 +8,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue, lot_fv_install_date, lot_builder_date, formChanged = false;
+        var clickedItem, lotNumber, lotName, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue, lot_fv_install_date, lot_builder_date, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -94,7 +94,10 @@
 
                 lotId       = $(this).data('lot_id');
                 lotNumber   = $(this).data('lotnum');
+//                lotName     = $(this).data('lotname');
                 lotPriority = $(this).data('lot_priority');
+
+                console.log('lotShow before ajax lotName: ' +$('#lot-name').val());
 
                 var request = $.ajax({
                     url: '/api/lotinfo/' +lotId,
@@ -102,22 +105,29 @@
                         $('#lot-num').val(lotNumber);
 
                         if ( (jdata.count > 0) && (jdata.rdata) ) {
+                            console.log('lotShow after ajax success lotName: ' +jdata.rdata.lot_name);
                             mode        = 'update';
+                            lotName     = ((jdata.rdata.lot_name) && (jdata.rdata.lot_name != null)) ? jdata.rdata.lot_name : lotNumber;
+//                            lotName     = jdata.rdata.lot_name;
                             lotNotes    = jdata.rdata.notes;
-                            lotStatusId = jdata.rdata.status_id;
+                            lotStatusId = ((jdata.rdata.status_id) && (jdata.rdata.status_id != null) && (jdata.rdata.status_id > 0)) ? jdata.rdata.status_id : 179;
                             lotTitle    = 'LSR -- Data ready for Lot: ';
                             lot_fv_install_date = jdata.rdata.fv_install_date;
                             lot_builder_date    = jdata.rdata.builder_date;
 //                            lotPriority = jdata.rdata.priority;
+                            console.log('lotShow after ajax success, assignment.. lotName: ' +lotName);
                         }
 
                         else {
                             mode        = 'new';
+                            lotName     = lotNumber;
                             lotNotes    = '';
-                            lotStatusId = 0;
+                            lotStatusId = 179;
                             lotTitle    = 'LSR -- No data found. Ready to record data for Lot: ';
+                            console.log('lotShow after ajax else, assignment.. lotName: ' +lotName);
 
                         }
+                        $('#lot-name').val(lotName);
                         $('#lot-notes').val(lotNotes);
                         $('#status-id').val(lotStatusId);
                         $('#lot-history-num').val(jdata.count);
@@ -140,9 +150,11 @@
             $("#modalSave").on('click', function(event) {
 //            $("#lotBox").on('submit', function(event) {
                 event.preventDefault();
+                console.log('click save.. lotName: ' +lotName);
                 var formData = {
                     lot_id:     lotId,
                     lot_num:    lotNumber,
+                    lot_name:   $('#lot-name').val(),
                     lot_notes:  $('#lot-notes').val(),
                     lot_status: $('#status-id').val(),
                     lot_verify_no_update:   $('#lot-verify-no-update').is(':checked') ? 1 : 0,
@@ -215,30 +227,40 @@
                         {{ csrf_field() }}
 
                         {{--<div class="row">--}}
-                            <div class="form-group form-inline">
-                                <div class="row">
-                                {{--Lot Number--}}
-                                {{--<div class="col-xs-12 col-md-8">--}}
-                                    <div class="col-md-4">
-                                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-                                        <label for="lot-num" class="control-label">Lot Number:</label>
-                                    {{--</div>--}}
-                                    {{--<div class="col-xs-6 col-md-4">--}}
-                                        <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled" style="max-width: 60px;">
-                                    </div>
-                                    <div class="col-md-5 col-md-offset-3">
-                                        {{--<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>--}}
-                                        {{--<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"><i class="glyph_red"></i></span>--}}
-                                        {{--<p class="text-right">--}}
-                                        <div class="pull-right">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"</span>
-                                        <label for="lot-critical-issue" class="control-label">Critical Issue!&nbsp;</label>
-                                        <input type="checkbox" id="lot-critical-issue"></div>
-                                        {{--</p>--}}
-                                    </div>
+                        <div class="form-group form-inline">
+                            <div class="row">
+                            {{--Lot Number--}}
+                            {{--<div class="col-xs-12 col-md-8">--}}
+                                <div class="col-md-4">
+                                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                    <label for="lot-num" class="control-label">Lot:</label>
+                                {{--</div>--}}
+                                {{--<div class="col-xs-6 col-md-4">--}}
+                                    <input type="text" class="form-control" id="lot-num" aria-disabled="true" disabled="disabled" style="max-width: 60px;">
+                                </div>
+                                <div class="col-md-5 col-md-offset-3">
+                                    {{--<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>--}}
+                                    {{--<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"><i class="glyph_red"></i></span>--}}
+                                    {{--<p class="text-right">--}}
+                                    <div class="pull-right">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"</span>
+                                    <label for="lot-critical-issue" class="control-label">Critical Issue!&nbsp;</label>
+                                    <input type="checkbox" id="lot-critical-issue"></div>
+                                    {{--</p>--}}
                                 </div>
                             </div>
-                        {{--</div>--}}
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <div class="row">
+                                {{--Lot Name--}}
+                                <div class="col-md-4">
+                                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                    <label for="lot-name" class="control-label">Lot Name:</label>
+                                    <input type="text" class="form-control" id="lot-name" style="max-width: 200px;">
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             {{--Status--}}
