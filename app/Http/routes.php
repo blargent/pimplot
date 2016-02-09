@@ -78,7 +78,7 @@ Route::group(['middleware' => 'web'], function () {
         });
 //        Route::get('report', 'ReportController@index');
 
-        Route::get('source', function()
+        Route::get('/source', function()
         {
             $columns = array(
 //                'id',
