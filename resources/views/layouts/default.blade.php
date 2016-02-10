@@ -67,11 +67,10 @@
 </div>
 
 <!-- JavaScripts -->
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-
+{{--<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>--}}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/cartalyst/data-grid/js/underscore.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/cartalyst/data-grid/js/data-grid.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('js/moment.js') }}"></script>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
