@@ -13,7 +13,7 @@
 
 {{-- Inline scripts --}}
 @section('scripts')
-<script src="{{ URL::asset('js/moment.js') }}"></script>
+{{--<script src="{{ URL::asset('js/moment.js') }}"></script>--}}
 {{--<script src="{{ URL::asset('assets/js/bootstrap-datetimepicker.js') }}"></script>--}}
 
 <script>
@@ -39,11 +39,11 @@
         /**
          * DEMO ONLY EVENTS
          */
-        $('[data-per-page]').on('change', function()
-        {
-            grid.setThrottle($(this).val());
-            grid.refresh();
-        });
+//        $('[data-per-page]').on('change', function()
+//        {
+//            grid.setThrottle($(this).val());
+//            grid.refresh();
+//        });
     });
 </script>
 @stop
