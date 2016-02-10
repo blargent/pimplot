@@ -216,7 +216,7 @@
                     {{--Handing goes here--}}
                     {{--Order num goes here--}}
 
-                    <th class="sortable" data-grid="standard" data-sort="build_type_id.label">Build Type</th>
+                    <th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>
 
                     {{--<th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>--}}
                     {{--FV_INSTALL_DATE goes here--}}
