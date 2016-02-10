@@ -3,7 +3,8 @@
 Homestead.yaml
 Homestead.json
 .env
+/config/database.php
 .idea/*
 .idea/
 /.idea
-/framework/sessions/*
+/storage/framework/sessions/*
