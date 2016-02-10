@@ -39,11 +39,11 @@
         /**
          * DEMO ONLY EVENTS
          */
-//        $('[data-per-page]').on('change', function()
-//        {
-//            grid.setThrottle($(this).val());
-//            grid.refresh();
-//        });
+        $('[data-per-page]').on('change', function()
+        {
+            grid.setThrottle($(this).val());
+            grid.refresh();
+        });
     });
 </script>
 @stop
