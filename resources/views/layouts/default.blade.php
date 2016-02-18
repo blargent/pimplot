@@ -6,7 +6,7 @@
             Lot Status Report :: Mega Report
         @show
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" [tent="width=device-width, initial-scale=1.0">
     {{--<link href="{{ URL::to('assets/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">--}}
     {{--<link href="{{ URL::to('assets/css/font-awesome.min.css') }}" rel="stylesheet" media="screen">--}}
     {{--<link href="{{ URL::to('assets/css/demo.css') }}" rel="stylesheet" media="screen">--}}

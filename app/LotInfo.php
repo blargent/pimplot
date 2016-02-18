@@ -46,12 +46,16 @@ class LotInfo extends Model
     }
 
     public function lotdef() {
-        return $this->belongsTo('App\LotDef');
+        return $this->belongsTo('App\LotDef', 'id', 'lot_id');
     }
 
     public function buildtype() {
         return $this->hasOne('App\BuildType', 'id', 'build_type_id');
     }
+
+//    public function statuses() {
+//        return $this->hasManyThrough('App\StatusDef', )
+//    }
 
 
     //

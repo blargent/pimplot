@@ -211,31 +211,30 @@
                     <th class="sortable" data-grid="standard" data-sort="lot_name">Lot name</th>
                     <th class="sortable" data-grid="standard" data-sort="status_id">Status</th>
                     <th class="sortable" data-grid="standard" data-sort="critical_issue_flag">Critical Issue</th>
-                    {{--Plan # goes here--}}
-                    {{--Elevation goes here--}}
-                    {{--Handing goes here--}}
-                    {{--Order num goes here--}}
+                            {{--Plan # goes here--}}
+                            {{--Elevation goes here--}}
+                            {{--Handing goes here--}}
+                            {{--Order num goes here--}}
 
                     <th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>
 
-                    {{--<th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>--}}
-                    {{--FV_INSTALL_DATE goes here--}}
-                    {{--BUILDER_DATE goes here--}}
-                    {{--DAYS_OUT goes here--}}
-                    {{--EARLIEST_POSSIBLE_DATE goes here?--}}
+                            {{--<th class="sortable" data-grid="standard" data-sort="build_type_id">Build Type</th>--}}
+                            {{--FV_INSTALL_DATE goes here--}}
+                            {{--BUILDER_DATE goes here--}}
+                            {{--DAYS_OUT goes here--}}
+                            {{--EARLIEST_POSSIBLE_DATE goes here?--}}
                     <th class="sortable" data-grid="standard" data-sort="notes">Notes</th>
                     <th class="sortable" data-grid="standard" data-sort="builder_date">Builder Date</th>
                     <th class="sortable" data-grid="standard" data-sort="adjust_date_to">Adjust Date To</th>
                     <th class="sortable" data-grid="standard" data-sort="created_at">Last Updated</th>
                     <th class="sortable" data-grid="standard" data-sort="verify_no_update">No Update Flag</th>
-
                     <th class="sortable" data-grid="standard" data-sort="user_id">Updated By</th>
 
-                    {{--<th class="sortable" data-grid="standard" data-sort="notes">Notes</th>--}}
-                    {{--<th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>--}}
-                    {{--<th class="sortable col-md-3" data-grid="standard" data-sort="lot_num">Lot #</th>--}}
-                    {{--<th class="sortable col-md-3" data-grid="standard" data-sort="status_id">Status ID</th>--}}
-                    {{--<th class="sortable col-md-2" data-grid="standard" data-sort="notes">Notes</th>--}}
+                            {{--<th class="sortable" data-grid="standard" data-sort="notes">Notes</th>--}}
+                            {{--<th class="sortable col-md-4" data-grid="standard" data-sort="id">ID</th>--}}
+                            {{--<th class="sortable col-md-3" data-grid="standard" data-sort="lot_num">Lot #</th>--}}
+                            {{--<th class="sortable col-md-3" data-grid="standard" data-sort="status_id">Status ID</th>--}}
+                            {{--<th class="sortable col-md-2" data-grid="standard" data-sort="notes">Notes</th>--}}
                 </tr>
                 </thead>
                 <tbody></tbody>

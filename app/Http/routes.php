@@ -82,8 +82,8 @@ Route::group(['middleware' => 'web'], function () {
         {
             $columns = array(
 //                'id',
-//                'lot_id',
                 'lot_num',
+//                'lot_id',
                 'lot_name',
                 'status_id',
                 'verify_no_update',
@@ -98,8 +98,8 @@ Route::group(['middleware' => 'web'], function () {
             $settings = array(
                 'sort'        => 'lot_num',
                 'direction'   => 'asc',
-                'max_results' => 50,
-                'throttle'    => 20,
+//                'max_results' => 100,
+//                'throttle'    => 20,
             );
             // Status
 //            $columnss = array(
@@ -120,13 +120,24 @@ Route::group(['middleware' => 'web'], function () {
             $relations      = ['statusdef'];
             $relationsu     = ['user'];
             $relate         = ['statusdef', 'user', 'buildtype'];
+            $rel    = ['latestlotinfo', 'statusdef', 'user', 'buildtype'];
+            $rela   = ['statusdef'];
+            $relb   = ['latestlotinfo'];
+            $relc   = ['teststatus'];
 //            $relatetest     = []
 
 //            $data = App\LotInfo::with([ 'statusdef' => function($query) {
 //                $query->orderBy('created_at', 'desc')
 //                    ->take(1)->get();
-//            } ]);
+//            } ], 'user', 'buildtype');
+
+//            $data = App\LotDef::with($rel);
+//            $datab = App\StatusDef::with
+            $lots = DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id');
+
+//            $data = App\LotInfo::whereIn('lot_id', $lots)->with($relate)->latest();
             $data = App\LotInfo::with($relate);
+//            $data = App\LotInfo::with($relate)->latest();
 
 
 

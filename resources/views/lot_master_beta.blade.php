@@ -8,7 +8,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotName, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue, lot_fv_install_date, lot_builder_date, formChanged = false;
+        var clickedItem, lotNumber, lotName, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue = 0, lot_fv_install_date, lot_builder_date, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -69,7 +69,7 @@
 //               formChanged = true;
 //                $('#modalSave').prop('disabled', false);
 //            });
-            $('input[id=lot-critical-issue]').on('click', function(e) {
+            $('input[id=lot-critical-issue]').on('change', function(e) {
                 if ( $(this).is(':checked') ) {
                     $('.glyphicon-exclamation-sign').css('color', 'red');
                 }
@@ -96,8 +96,7 @@
                 lotNumber   = $(this).data('lotnum');
 //                lotName     = $(this).data('lotname');
                 lotPriority = $(this).data('lot_priority');
-
-                console.log('lotShow before ajax lotName: ' +$('#lot-name').val());
+//                console.log('lotShow before ajax lotName: ' +$('#lot-name').val());
 
                 var request = $.ajax({
                     url: '/api/lotinfo/' +lotId,
@@ -105,7 +104,7 @@
                         $('#lot-num').val(lotNumber);
 
                         if ( (jdata.count > 0) && (jdata.rdata) ) {
-                            console.log('lotShow after ajax success lotName: ' +jdata.rdata.lot_name);
+//                            console.log('lotShow after ajax success lotName: ' +jdata.rdata.lot_name);
                             mode        = 'update';
                             lotName     = ((jdata.rdata.lot_name) && (jdata.rdata.lot_name != null)) ? jdata.rdata.lot_name : lotNumber;
 //                            lotName     = jdata.rdata.lot_name;
@@ -114,8 +113,9 @@
                             lotTitle    = 'LSR -- Data ready for Lot: ';
                             lot_fv_install_date = jdata.rdata.fv_install_date;
                             lot_builder_date    = jdata.rdata.builder_date;
+                            lot_critical_issue  = jdata.rdata.critical_issue_flag;
 //                            lotPriority = jdata.rdata.priority;
-                            console.log('lotShow after ajax success, assignment.. lotName: ' +lotName);
+//                            console.log('lotShow after ajax success, assignment.. lotName: ' +lotName);
                         }
 
                         else {
@@ -124,10 +124,16 @@
                             lotNotes    = '';
                             lotStatusId = 179;
                             lotTitle    = 'LSR -- No data found. Ready to record data for Lot: ';
-                            console.log('lotShow after ajax else, assignment.. lotName: ' +lotName);
-
+                            lot_critical_issue = 0;
+//                            console.log('lotShow after ajax else, assignment.. lotName: ' +lotName);
                         }
                         $('#lot-name').val(lotName);
+//                        if (lot_critical_issue == 1) {
+//                            $('#lot-critical-issue').prop('checked', true).change();
+//                        } else {
+//                            $('#lot-critical-issue').prop('checked', false).change();
+//                        }
+                        $('#lot-critical-issue').prop('checked', (lot_critical_issue == 1) ? true : false).change();
                         $('#lot-notes').val(lotNotes);
                         $('#status-id').val(lotStatusId);
                         $('#lot-history-num').val(jdata.count);
@@ -150,7 +156,7 @@
             $("#modalSave").on('click', function(event) {
 //            $("#lotBox").on('submit', function(event) {
                 event.preventDefault();
-                console.log('click save.. lotName: ' +lotName);
+//                console.log('click save.. lotName: ' +lotName);
                 var formData = {
                     lot_id:     lotId,
                     lot_num:    lotNumber,
@@ -164,7 +170,7 @@
 //                    lot_fv_install_date:    $('#lot-fv-install-date').datepicker("getDate"),
 //                    lot_builder_date:       $('#lot-builder-date').datepicker("getDate")
                 }
-                console.log(formData);
+//                console.log(formData);
 
                 $.ajaxSetup({
                     headers: {
@@ -190,6 +196,8 @@
 
             $('#showLotInfo').on('hidden.bs.modal', function(e) {
                 $('#lot-verify-no-update, #lot-critical-issue').prop('checked', false);
+                lot_critical_issue = 0;
+//                $('#lot-critical-issue').val(0).change();
                 $('#lot-fv-install-date').datepicker("setDate");
                 $('#lot-builder-date').datepicker("setDate");
                 $('.glyphicon-exclamation-sign').css('color', 'black');

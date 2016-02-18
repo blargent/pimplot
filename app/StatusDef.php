@@ -26,12 +26,13 @@ class StatusDef extends Model
     //
 
     public function map() {
-        return $this->belongsTo('App\LotMap');
+        return $this->belongsTo('App\LotMap', 'lot_map_id');
     }
 
     public function lotinfo() {
         return $this->belongsTo('App\LotInfo', 'status_id');
     }
+
 //    public function lotinfo() {
 //        return $this->hasMany('App\LotInfo');
 //    }

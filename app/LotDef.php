@@ -38,12 +38,32 @@ class LotDef extends Model
     }
 
     public function lotinfo() {
-        return $this->hasMany('App\LotInfo');
+        return $this->hasMany('App\LotInfo', 'lot_id', 'id');
     }
+
+    public function latestlotinfo() {
+        return $this->hasOne('App\LotInfo', 'lot_id', 'id')->latest();
+    }
+
+    /**
+     * Holy poop this works in tinker!!!!!
+     *
+     * $ld = App\LotDef::first()->teststatus()
+     *
+     * @return mixed
+     */
+    public function teststatus() {
+        return $this->hasOne('App\LotInfo', 'lot_id', 'id')->latest()->first()->statusdef();
+    }
+
+//    public function statuses() {
+//        return $this->hasManyThrough('App\StatusDef', 'App\LotInfo', 'id');
+//    }
+
 
     public static function boot() {
         static::updating(function ($lotdef) {
-           $lotdef->updated_by = Auth::user()-id;
+           $lotdef->updated_by = Auth::user()->id;
         });
     }
     //

@@ -123,7 +123,9 @@ class LotInfosController extends Controller
     public function alpha() {
         $lotmap     = LotMap::latest()->get();
         $lotdefs    = LotDef::where('map_id', '=', 2)->get();
-        $lotinfos   = LotInfo::all();
+        $lds        = $lotdefs->select('id')->distinct()->pluck('id');
+        $lotinfos   = LotInfo::whereIn('id', $lds);
+//        $lotinfos   = LotInfo::all();
         $statusdefs = StatusDef::where('build_type_id', '=', 3)->orderBy('order', 'DESC')->get();
 
         //dd(compact('lotmap', 'lotdefs', 'lotinfos'));
