@@ -45,5 +45,9 @@ class Community extends Model
     public function maps() {
         return $this->hasManyThrough('App\LotMap', 'App\Subdivision');
     }
+
+    public function taglocation() {
+        return $this->belongsTo('App\TagLocation');
+    }
     //
 }

@@ -135,8 +135,50 @@ Route::group(['middleware' => 'web'], function () {
 //            $datab = App\StatusDef::with
             $lots = DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id');
 
+            $relates = ['latestlotinfo.statusdef', 'latestlotinfo.user', 'latestlotinfo.buildtype'];
+//            $relates = ['latestlotinfo.statusdef', 'latestlotinfo.user', 'latestlotinfo.buildtype'];
+
+//            $data = App\LotInfo::whereIn(['lot_id', $lots => function($q) {
+//                $q->latest();
+//            }])
+            $data = App\LotInfo::whereIn('lot_id', $lots)
+                ->orderBy('created_at', 'desc')->first()
+                ->groupBy('lot_num')
+                ->distinct()
+                ->with(
+                    [
+                    'statusdef',
+                    'buildtype',
+                    'user'
+                    ])
+//                ->groupBy('lot_num')
+
+//                ->orderBy('created_at', 'DESC')
+//                ->groupBy('lot_num')
+//                ->distinct()
+
+//                ->orderBy('created_at', 'DESC')
+//                ->groupBy('lot_num')
+//                ->distinct()
+            ;
+
+//            $data->orderBy('created_at', 'DESC');
+
+//            $data =
+
 //            $data = App\LotInfo::whereIn('lot_id', $lots)->with($relate)->latest();
-            $data = App\LotInfo::with($relate);
+
+            //$data = App\LotInfo::with($relate);
+
+//            $moo = App\LotDef::has('latestlotinfo')->with($relate)->get();
+//            dd($moo);
+//            $moo = App\LotDef::has('latestlotinfo')->with('latestlotinfo')->get();
+//            $data->unique('lot_num');
+
+            //dd($data->toArray());
+//            $data->with($relate);
+//            $data = App\LotInfo::with($relate)->distinct();
+//            $data = App\LotInfo::with($relate);
 //            $data = App\LotInfo::with($relate)->latest();
 
 
