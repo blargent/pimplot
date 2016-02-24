@@ -10,7 +10,7 @@ class TagLocation extends Model
     protected $table = 'taglocations';
 
     public function communities() {
-        return $this->hasMany('App\Community');
+        return $this->hasMany('App\Community', 'taglocation_id', 'id');
     }
 
 /*    public function subdivisions() {

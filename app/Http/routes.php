@@ -16,16 +16,9 @@ use App\Http\Requests;
 use App\LotDef;
 
 Route::get('k', function() {
-    //$lotmap = App\LotMap::where('map_num', '=', 1)->get();
     $goods = [];
-//    $lotmap = App\LotMap::findOrFail(2);
-//    $lotdefs = App\LotDef::all();
     $goods['lotmap'] = App\LotMap::findOrFail(2);
     $goods['lotdefs'] = App\LotDef::all();
-
-
-    //return $lotdefs->toArray();
-
     return $goods;
 });
 
@@ -73,10 +66,24 @@ Route::group(['middleware' => 'web'], function () {
            return view('standard');
         });
 
+        Route::get('standard2', function() {
+            return view('standard2');
+        });
+
         Route::get('report', function() {
             return view('standard');
         });
-//        Route::get('report', 'ReportController@index');
+
+        Route::get('report2', function() {
+            return view('standard2');
+        });
+
+        Route::get('reportv2', function() {
+            return view('newreports.index');
+        });
+
+
+
 
         Route::get('source', function()
         {
@@ -101,21 +108,6 @@ Route::group(['middleware' => 'web'], function () {
 //                'max_results' => 100,
 //                'throttle'    => 20,
             );
-            // Status
-//            $columnss = array(
-//                'lot_num',
-//                'build_type_id',
-//                'critical_issue_flag',
-//                'verify_no_update',
-//                'notes',
-//                'created_at',
-//                'status_id',
-//            );
-//            $settingss = array(
-//                'sort'        => 'lot_num',
-//                'direction'   => 'asc',
-//                'max_results' => 50,
-//            );
 
             $relations      = ['statusdef'];
             $relationsu     = ['user'];
@@ -124,7 +116,6 @@ Route::group(['middleware' => 'web'], function () {
             $rela   = ['statusdef'];
             $relb   = ['latestlotinfo'];
             $relc   = ['teststatus'];
-//            $relatetest     = []
 
 //            $data = App\LotInfo::with([ 'statusdef' => function($query) {
 //                $query->orderBy('created_at', 'desc')
@@ -132,7 +123,6 @@ Route::group(['middleware' => 'web'], function () {
 //            } ], 'user', 'buildtype');
 
 //            $data = App\LotDef::with($rel);
-//            $datab = App\StatusDef::with
             $lots = DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id');
 
             $relates = ['latestlotinfo.statusdef', 'latestlotinfo.user', 'latestlotinfo.buildtype'];
@@ -141,6 +131,8 @@ Route::group(['middleware' => 'web'], function () {
 //            $data = App\LotInfo::whereIn(['lot_id', $lots => function($q) {
 //                $q->latest();
 //            }])
+
+            //before playing with................................
             $data = App\LotInfo::whereIn('lot_id', $lots)
                 ->orderBy('created_at', 'desc')->first()
                 ->groupBy('lot_num')
@@ -150,40 +142,9 @@ Route::group(['middleware' => 'web'], function () {
                     'statusdef',
                     'buildtype',
                     'user'
-                    ])
-//                ->groupBy('lot_num')
+                    ]);
+            //before playing with................................
 
-//                ->orderBy('created_at', 'DESC')
-//                ->groupBy('lot_num')
-//                ->distinct()
-
-//                ->orderBy('created_at', 'DESC')
-//                ->groupBy('lot_num')
-//                ->distinct()
-            ;
-
-//            $data->orderBy('created_at', 'DESC');
-
-//            $data =
-
-//            $data = App\LotInfo::whereIn('lot_id', $lots)->with($relate)->latest();
-
-            //$data = App\LotInfo::with($relate);
-
-//            $moo = App\LotDef::has('latestlotinfo')->with($relate)->get();
-//            dd($moo);
-//            $moo = App\LotDef::has('latestlotinfo')->with('latestlotinfo')->get();
-//            $data->unique('lot_num');
-
-            //dd($data->toArray());
-//            $data->with($relate);
-//            $data = App\LotInfo::with($relate)->distinct();
-//            $data = App\LotInfo::with($relate);
-//            $data = App\LotInfo::with($relate)->latest();
-
-
-
-//            $sdata = $data->
 
             // // Initiate by a database query
 //             return DataGrid::make(DB::table('cities'), $columns, $settings);
@@ -191,10 +152,91 @@ Route::group(['middleware' => 'web'], function () {
             // return DataGrid::make(with(new City)->newQuery(), $columns, $settings);
             // Or by an Eloquent model
 
-//            dd(DataGrid::make($data, $columns, $settings)->toArray());
             return DataGrid::make($data, $columns, $settings);
-
 //            return DataGrid::make(new App\LotInfo, $columns, $settings);
+        });
+
+        Route::get('source2', function()
+        {
+            $columns = array(
+//                'lot_id',
+//                'info.lot_id',
+                'lot_num',
+                'lot_name',
+                'statusname',
+                'verify_no_update',
+                'buildlabel',
+                'notes',
+                'builder_date',
+                'adjust_date_to',
+                'created_at',
+                'username',
+            );
+            $settings = array(
+                'sort'        => 'lot_num',
+                'direction'   => 'asc',
+//                'max_results' => 100,
+//                'throttle'    => 20,
+            );
+
+
+            $relate         = ['statusdef', 'user', 'buildtype'];
+            $relates = ['latestlotinfo.statusdef', 'latestlotinfo.user', 'latestlotinfo.buildtype'];
+
+//            $data = [];
+            $lots = DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id');
+            $lots = collect($lots);
+//            $li = new App\LotInfo;
+
+//            $lis = App\LotInfo::whereIn('lot_id', $lots)->latest()->get();
+
+//            foreach ($lots as $lot => $num) {
+//                $li = App\LotInfo::where('lot_id', $num)->orderBy('created_at', 'DESC')->first();
+//                $data[$num]['statusname']   = $li->statusdef->name;
+//                $data[$num]['buildlabel']   = $li->buildtype->description;
+//                $data[$num]['username']     = $li->user->name;
+//                $data[] = $li;
+////                $data[$num] = $li;
+////                $data[$num]['status'] = $li->with('statusdef')->get();
+////                $data[$num] = App\LotInfo::with('statusdef')->where('lot_id', $num)->orderBy('created_at', 'DESC')->first();
+////                $data[$num] = App\LotInfo::where('lot_id', $num)->orderBy('created_at', 'DESC')->first();
+////                $data[$num] = $li->where('lot_id', $num)->orderBy('created_at', 'DESC')->first();
+//            }
+
+//            $data = collect($data);
+
+//            $lotinfos = $lis->map(function($li) {
+//               return $li->lot_num = $li->lot_name;
+//            });
+//            $lis = $lis
+
+//            dd($lotinfos);
+            $megalis = App\LotInfo::whereIn('lot_id', DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id'));
+
+            $megakeys = $megalis->keyBy('lot_id');
+
+
+
+//            dd($data);
+
+//            $data = App\LotInfo::whereIn('lot_id', $lots)
+//                ->orderBy('created_at', 'desc')->first()
+//                ->groupBy('lot_num')
+//                ->distinct()
+//                ->with(
+//                    [
+//                    'statusdef',
+//                    'buildtype',
+//                    'user'
+//                    ]);
+
+            // // Initiate by a database query
+//             return DataGrid::make(DB::table('cities'), $columns, $settings);
+            // // Or by an Eloquent model query
+            // return DataGrid::make(with(new City)->newQuery(), $columns, $settings);
+            // Or by an Eloquent model
+
+            return DataGrid::make($data, $columns, $settings);
         });
 
         Route::get('api/lotinfo/{lotid}', 'LotInfosController@getLotInfo');
