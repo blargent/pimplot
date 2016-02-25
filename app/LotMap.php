@@ -27,7 +27,7 @@ class LotMap extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function lotdef() {
-        return $this->hasMany('App\LotDef');
+        return $this->hasMany('App\LotDef', 'lot_map_id', 'id');
     }
 
 //    public function lotinfo() {

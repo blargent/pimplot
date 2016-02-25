@@ -63,9 +63,9 @@
                                 Reports <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/report') }}">old Report (not going to work)</a></li>
-                                <li><a href="{{ url('/reportv2') }}">NEW  attempt, failed.</a></li>
-                                <li><a href="{{ url('/reportv3') }}">NEW  attempt</a></li>
+                                <li><a href="{{ url('/') }}"><strike>old Report (not going to work)</strike></a></li>
+                                <li><a href="{{ url('/') }}"><strike>NEW  attempt, failed.</strike></a></li>
+                                <li><a href="{{ url('/reportv3') }}">NEW  attempt. Awesome. Pick me</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

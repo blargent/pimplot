@@ -46,7 +46,8 @@ class LotInfo extends Model
     }
 
     public function lotdef() {
-        return $this->belongsTo('App\LotDef', 'id', 'lot_id');
+        return $this->belongsTo('App\LotDef', 'id');
+//        return $this->belongsTo('App\LotDef', 'id', 'lot_id');
     }
 
     public function buildtype() {
@@ -57,22 +58,4 @@ class LotInfo extends Model
         $query->orderBy('created_at', 'DESC')->take(1);
     }
 
-    public function scopeNewest($query) {
-        return $query->orderBy('created_at', 'DESC')->take(1);
-    }
-
-    public function scopeInMap($query, $map_id) {
-        $lots = LotDef::where('map_id', $map_id)->pluck('id');
-
-        return $query->whereIn('lot_id', $lots);
-    }
-
-
-
-//    public function statuses() {
-//        return $this->hasManyThrough('App\StatusDef', )
-//    }
-
-
-    //
 }

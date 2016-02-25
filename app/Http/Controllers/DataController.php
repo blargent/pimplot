@@ -14,13 +14,28 @@ use Datatable;
 class DataController extends Controller
 {
     public function getDataTable() {
-//        return Datatable::collection(LotInfo::all())
-        return Datatable::collection(LotInfo::all(array('lot_num', 'lot_name', 'status_id', 'notes', 'user_id')))
+        $moo = LotDef::where('map_id', 2)->pluck('id')->toArray();
+
+        $lotinfos = collect(LotInfo::whereIn('lot_id', $moo)->get(array('lot_num', 'lot_name', 'status_id', 'critical_issue_flag',
+                                                                    'build_type_id', 'notes', 'builder_date', 'adjust_date_to',
+                                                                    'created_at', 'verify_no_update', 'user_id')));
+        $lotinfos = $lotinfos->sortByDesc('created_at');
+        $lotinfos = $lotinfos->unique('lot_num');
+        $lotinfos = $lotinfos->values();
+
+        return Datatable::collection($lotinfos)
             ->showColumns('lot_num', 'lot_name')
             ->addColumn('status_id', function($model){
                 return $model->statusdef->label;
             })
-            ->showColumns('notes', 'user_id')
+            ->showColumns('critical_issue_flag')
+            ->addColumn('build_type_id', function($model) {
+                return $model->buildtype->label;
+            })
+            ->showColumns('notes', 'builder_date', 'adjust_date_to', 'created_at', 'verify_no_update')
+            ->addColumn('user_id', function($model) {
+                return $model->user->name;
+            })
             ->searchColumns('lot_num')
             ->orderColumns('lot_num')
             ->make();
@@ -31,12 +46,4 @@ class DataController extends Controller
 //        return view('newreports.index');
 //    }
 
-//$lots = DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id');
-//    public function anyData() {
-//        return Datatables::of(LotDef::query()
-//            ->where('map_id', 2)
-//            ->with('latestlotinfo', 'latestlotinfo.statusdef', 'latestlotinfo.user', 'latestlotinfo.buildtype'))
-//            ->make(true);
-//        return Datatables::of(LotInfo::query())->make(true);
-//    }
 }

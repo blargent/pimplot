@@ -1,39 +1,22 @@
 @extends('layouts.newreports3')
 
 @section('content')
+    <div class="page-header">
+        <h1>Lot Info Report :: Raw LotInfo Data, now SORTABLE</h1>
+        <p class="lead">Lot Info data is now displaying only the most recent data <i>per lot</i> and is now fully <strong>sortable</strong>. Not only is it sortable, after clicking on a header to sort by, you can hold down SHIFT and click on a different header to sub-sort <i>within</i> the currely sorted layout. Cool.</p>
+    </div>
+
+
     {!! Datatable::table()
-     ->addColumn('Lot Num', 'Lot Name', 'Status', 'Notes', 'User')
+     ->addColumn('Lot #', 'Lot Name', 'Status', 'Critical Issue!', 'Build Type',  'Notes', 'Builder Date', 'Earliest Possible Date', 'Last Updated At', 'No Update Flag', 'Last User')
      ->setUrl(URL::to('api/lis'))
-     ->setOptions(array('bServerSide' => false))
+     ->setOptions(array(
+         'bServerSide' => false,
+         'stripeClasses' => ['strip1', 'strip2'],
+         'info' => true,
+         'processing' => true,
+         'style' => 'display')
+     )
      ->render();
      !!}
-
 @stop
-
-{{--@push('scripts')--}}
-{{--<script>--}}
-    {{--$(function() {--}}
-        {{--$('#lot_defs-table').DataTable({--}}
-            {{--processing: true,--}}
-            {{--serverSide: true,--}}
-            {{--ajax: '{!! route('datatables.data') !!}',--}}
-            {{--columns: [--}}
-                {{--{ data: 'latestlotinfo.lot_num', name: 'lot_num' },--}}
-                {{--{ data: 'latestlotinfo.lot_name', name: 'lot_name' },--}}
-                {{--{ data: 'latestlotinfo.statusdef.label', name: 'status_id' },--}}
-                {{--{ data: 'latestlotinfo.buildtype.label', name: 'build_type_id' },--}}
-{{--//                { data: 'build_type_id', name: 'build_type_id' },--}}
-                {{--{ data: 'latestlotinfo.fv_install_date', name: 'fv_install_date' },--}}
-                {{--{ data: 'latestlotinfo.builder_date', name: 'builder_date' },--}}
-                {{--{ data: 'latestlotinfo.adjust_date_to', name: 'adjust_date_to' },--}}
-                {{--{ data: 'latestlotinfo.critical_issue_flag', name: 'critical_issue_flag' },--}}
-                {{--{ data: 'latestlotinfo.verify_no_update', name: 'verify_no_update' },--}}
-                {{--{ data: 'latestlotinfo.notes', name: 'notes' },--}}
-                {{--{ data: 'latestlotinfo.created_at', name: 'created_at' },--}}
-                {{--{ data: 'latestlotinfo.user.name', name: 'user_id' }--}}
-            {{--]--}}
-        {{--});--}}
-    {{--});--}}
-{{--</script>--}}
-{{--@endpush--}}
-

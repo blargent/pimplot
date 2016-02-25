@@ -34,7 +34,7 @@ class LotDef extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function map() {
-        return $this->belongsTo('App\LotMap');
+        return $this->belongsTo('App\LotMap', 'id', 'lot_map_id');
     }
 
     public function lotinfo() {

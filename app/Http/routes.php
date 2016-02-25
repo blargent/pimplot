@@ -88,7 +88,7 @@ Route::group(['middleware' => 'web'], function () {
         });
 
         Route::resource('lis', 'DataController');
-        Route::get('api/lis', array('as' => 'api.lis', 'uses' => 'DataController@getDataTable'));
+        Route::get('api/lis/', array('as' => 'api.lis', 'uses' => 'DataController@getDataTable'));
 
 
 
