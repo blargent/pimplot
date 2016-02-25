@@ -64,7 +64,8 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/report') }}">old Report (not going to work)</a></li>
-                                <li><a href="{{ url('/reportv2') }}">NEW Report generator</a></li>
+                                <li><a href="{{ url('/reportv2') }}">NEW  attempt, failed.</a></li>
+                                <li><a href="{{ url('/reportv3') }}">NEW  attempt</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

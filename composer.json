@@ -9,9 +9,7 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "~5.0",
         "doctrine/dbal": "v2.5.4",
-        "cartalyst/data-grid": "3.0.*",
-        "barryvdh/laravel-ide-helper": "^2.1",
-        "barryvdh/laravel-dompdf": "0.6.*"
+        "chumper/datatable": "dev-develop"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -54,8 +52,6 @@
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
-            "php artisan optimize",
-            "php artisan ide-helper:generate",
             "php artisan optimize"
         ]
     },

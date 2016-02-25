@@ -53,6 +53,22 @@ class LotInfo extends Model
         return $this->hasOne('App\BuildType', 'id', 'build_type_id');
     }
 
+    public function scopeLatestinfo($query) {
+        $query->orderBy('created_at', 'DESC')->take(1);
+    }
+
+    public function scopeNewest($query) {
+        return $query->orderBy('created_at', 'DESC')->take(1);
+    }
+
+    public function scopeInMap($query, $map_id) {
+        $lots = LotDef::where('map_id', $map_id)->pluck('id');
+
+        return $query->whereIn('lot_id', $lots);
+    }
+
+
+
 //    public function statuses() {
 //        return $this->hasManyThrough('App\StatusDef', )
 //    }

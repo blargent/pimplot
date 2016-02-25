@@ -148,9 +148,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
-        'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+//        'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
+//        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+//        Barryvdh\DomPDF\ServiceProvider::class,
+        Chumper\Datatable\DatatableServiceProvider::class,
+//        Yajra\Datatables\DatatablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -207,8 +209,10 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-        'DataGrid' => 'Cartalyst\DataGrid\Laravel\Facades\DataGrid',
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+//        'DataGrid' => 'Cartalyst\DataGrid\Laravel\Facades\DataGrid',
+//        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
+//        'Datatables' => Yajra\Datatables\Datatables::class,
     ],
 
 ];

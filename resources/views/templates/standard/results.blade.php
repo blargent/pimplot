@@ -5,7 +5,7 @@
     <tr>
         <td><%= r.lot_num %></td>
         <td><%= r.lot_name %></td>
-        <td><%= r.statusname %></td>
+        <td><%= r.latestlotinfo.statusdef.label %></td>
         <td><%= r.critical_issue_flag %></td>
         <td><%= r.buildlabel %></td>
         <td><%= r.notes %></td>

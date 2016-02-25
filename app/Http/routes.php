@@ -82,6 +82,21 @@ Route::group(['middleware' => 'web'], function () {
             return view('newreports.index');
         });
 
+        // chump datatables
+        Route::get('reportv3', function() {
+            return view('newreports.cindex');
+        });
+
+        Route::resource('lis', 'DataController');
+        Route::get('api/lis', array('as' => 'api.lis', 'uses' => 'DataController@getDataTable'));
+
+
+
+        Route::controller('datatables', 'DatatablesController', [
+            'anyData'   => 'datatables.data',
+            'getIndex'  => 'datatables',
+        ]);
+
 
 
 
@@ -161,16 +176,16 @@ Route::group(['middleware' => 'web'], function () {
             $columns = array(
 //                'lot_id',
 //                'info.lot_id',
-                'lot_num',
-                'lot_name',
-                'statusname',
-                'verify_no_update',
-                'buildlabel',
-                'notes',
-                'builder_date',
-                'adjust_date_to',
-                'created_at',
-                'username',
+                'latestlotinfo.lot_num',
+                'latestlotinfo.lot_name',
+                'latestlotinfo.statusdef.label',
+                'latestlotinfo.verify_no_update',
+                'latestlotinfo.buildtype.label',
+                'latestlotinfo.notes',
+                'latestlotinfo.builder_date',
+                'latestlotinfo.adjust_date_to',
+                'latestlotinfo.created_at',
+                'latestlotinfo.user.name',
             );
             $settings = array(
                 'sort'        => 'lot_num',
@@ -185,7 +200,7 @@ Route::group(['middleware' => 'web'], function () {
 
 //            $data = [];
             $lots = DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id');
-            $lots = collect($lots);
+//            $lots = collect($lots);
 //            $li = new App\LotInfo;
 
 //            $lis = App\LotInfo::whereIn('lot_id', $lots)->latest()->get();
@@ -213,9 +228,9 @@ Route::group(['middleware' => 'web'], function () {
 //            dd($lotinfos);
             $megalis = App\LotInfo::whereIn('lot_id', DB::table('lot_defs')->select('id')->where('map_id', 2)->distinct()->pluck('id'));
 
-            $megakeys = $megalis->keyBy('lot_id');
-
-
+            $data = LotDef::query()
+                ->where('map_id', 2)
+                ->with('latestlotinfo', 'latestlotinfo.statusdef', 'latestlotinfo.user', 'latestlotinfo.buildtype')->get();
 
 //            dd($data);
 

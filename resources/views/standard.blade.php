@@ -199,7 +199,7 @@
 
         <div class="table-responsive">
 
-            <table class="table table-striped table-bordered table-hover" data-source="{{ URL::to('source') }}" data-grid="standard">
+            <table class="table table-striped table-bordered table-hover" data-source="{{ URL::to('source2') }}" data-grid="standard">
 
                 <thead>
                 <tr>
