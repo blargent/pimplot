@@ -2,7 +2,7 @@
 
 @section('content')
     {!! Datatable::table()
-     ->addColumn('Lot Num', 'Lot Name', 'Notes', 'User', 'Status')
+     ->addColumn('Lot Num', 'Lot Name', 'Status', 'Notes', 'User')
      ->setUrl(URL::to('api/lis'))
      ->setOptions(array('bServerSide' => false))
      ->render();

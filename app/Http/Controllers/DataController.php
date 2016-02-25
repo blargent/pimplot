@@ -15,11 +15,12 @@ class DataController extends Controller
 {
     public function getDataTable() {
 //        return Datatable::collection(LotInfo::all())
-        return Datatable::collection(LotInfo::all(array('lot_num', 'lot_name', 'notes', 'user_id', 'status_id')))
-            ->showColumns('lot_num', 'lot_name', 'notes', 'user_id')
+        return Datatable::collection(LotInfo::all(array('lot_num', 'lot_name', 'status_id', 'notes', 'user_id')))
+            ->showColumns('lot_num', 'lot_name')
             ->addColumn('status_id', function($model){
                 return $model->statusdef->label;
             })
+            ->showColumns('notes', 'user_id')
             ->searchColumns('lot_num')
             ->orderColumns('lot_num')
             ->make();
