@@ -78,7 +78,6 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function (jdata) {
-//                            console.log('success: [jdata]: ' +jdata.data);
                             $('#subdivision').empty();
                             $('#map').empty();
                             if (jdata.count > 0) {

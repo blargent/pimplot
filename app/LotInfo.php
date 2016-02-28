@@ -32,10 +32,10 @@ class LotInfo extends Model
 {
     protected $table = 'lot_infos';
 
-    protected $dates = ['fv_install_date', 'builder_date', 'created_at', 'updated_at'];
+//    protected $dates = ['fv_install_date', 'builder_date', 'created_at', 'updated_at'];
 
     //protected $fillable = ['lot_id', 'lot_num', 'status_id', 'notes'];
-    protected $fillable = ['lot_id', 'lot_num', 'lot_name', 'status_id', 'plan_num', 'elevation', 'handing', 'build_type_id', 'fv_install_date', 'builder_date', 'critical_issue_flag', 'verify_no_update', 'notes', 'user_id'];
+    protected $fillable = ['lot_id', 'lot_num', 'lot_name', 'status_id', 'priority', 'plan_num', 'elevation', 'handing', 'build_type_id', 'fv_install_date', 'builder_date', 'critical_issue_flag', 'verify_no_update', 'notes', 'user_id'];
 
     public function statusdef() {
         return $this->hasOne('App\StatusDef', 'id', 'status_id');

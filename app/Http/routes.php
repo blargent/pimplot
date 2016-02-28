@@ -260,6 +260,8 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::post('api/lotinfo/{lotid}', 'LotInfosController@store');
 
+        Route::get('api/lotinfo/buildtype/{buildtypeid}', 'LotInfosController@getStatusMenu');
+
 //    Route::get('/mapa', 'LotInfosController@alpha');
 //    Route::get('api/mapselection/getcommunities/{community_id}', 'MapSelectionController@');
 //    Route::get('api/mapselection/subdivision/{subdivision_id}', 'MapSelectionController@buildSubdivisions');

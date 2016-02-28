@@ -25,13 +25,17 @@ class StatusDef extends Model
     protected $fillable = ['build_type_id', 'lot_map_id', 'order', 'name', 'label', 'days_duration', 'user_id'];
     //
 
-    public function map() {
-        return $this->belongsTo('App\LotMap', 'lot_map_id');
+//    public function map() {
+//        return $this->belongsTo('App\LotMap', 'lot_map_id');
+//    }
+
+    public function buildtype() {
+        return $this->belongsTo('App\BuildType', 'id', 'build_type_id');
     }
 
-    public function lotinfo() {
-        return $this->belongsTo('App\LotInfo', 'status_id');
-    }
+//    public function lotinfo() {
+//        return $this->belongsTo('App\LotInfo', 'status_id');
+//    }
 
 //    public function lotinfo() {
 //        return $this->hasMany('App\LotInfo');

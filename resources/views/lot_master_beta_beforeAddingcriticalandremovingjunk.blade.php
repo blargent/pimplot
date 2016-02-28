@@ -8,7 +8,7 @@
 
     <title>Lot Edit prototype</title>
     <script>
-        var clickedItem, lotNumber, lotName, lotId, lotBuildType, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue = 0, lot_fv_install_date, lot_builder_date, formChanged = false;
+        var clickedItem, lotNumber, lotName, lotId, lotNotes, lotStatusId, lotTitle, lotPriority, mode, lot_verify_no_update, lot_critical_issue = 0, lot_fv_install_date, lot_builder_date, formChanged = false;
     </script>
 
     {{--<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">--}}
@@ -37,11 +37,38 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
             $('#lot-fv-install-date').datepicker();
             $('#lot-builder-date').datepicker();
             $('#lot-fv-install-date').datepicker("option", "dateFormat", "yy-mm-dd");
             $('#lot-builder-date').datepicker("option", "dateFormat", "yy-mm-dd");
 
+//            $('#lot-fv-install-date').datepicker("option", "dateFormat", "mm-dd-yy");
+//            $('#lot-builder-date').datepicker("option", "dateFormat", "mm-dd-yy");
+//            $('#lot-fv-install-date, #lot-builder-date').datepicker();
+
+//            $('#lot-fv-install-date, #lot-builder-date').datepicker({
+//                dateFormat: "mm-dd-yy"
+//            });
+//            $('form').each(function(){
+//                $(this).data('serialized', $(this).serialize())
+//            }).on('change input', function(){
+//                $(this).find('#modalSave')
+//                                .prop('disabled', $(this).serialize() == $(this).data('serialized'));
+//                    })
+//                    .find('#modalSave')
+//                    .prop('disabled', true);
+
+//            $("#lotBox :input").change(function() {
+//                formChanged = true;
+//            });
+//            $("#lot-notes").on('change keyup', function () {
+//               formChanged = true;
+//            });
+//            $('#lot-verify-no-update').change(function(){
+//               formChanged = true;
+//                $('#modalSave').prop('disabled', false);
+//            });
             $('input[id=lot-critical-issue]').on('change', function(e) {
                 if ( $(this).is(':checked') ) {
                     $('.glyphicon-exclamation-sign').css('color', 'red');
@@ -65,10 +92,10 @@
                 $('#showLotInfoLabel').text('LSR -- Getting data...');
 
 
-                lotId           = $(this).data('lot_id');
-                lotNumber       = $(this).data('lotnum');
+                lotId       = $(this).data('lot_id');
+                lotNumber   = $(this).data('lotnum');
 //                lotName     = $(this).data('lotname');
-//                lotPriority = $(this).data('priority');
+                lotPriority = $(this).data('lot_priority');
 //                console.log('lotShow before ajax lotName: ' +$('#lot-name').val());
 
                 var request = $.ajax({
@@ -82,27 +109,12 @@
                             lotName     = ((jdata.rdata.lot_name) && (jdata.rdata.lot_name != null)) ? jdata.rdata.lot_name : lotNumber;
 //                            lotName     = jdata.rdata.lot_name;
                             lotNotes    = jdata.rdata.notes;
-
-                            lotBuildType= ((jdata.rdata.build_type_id) && (jdata.rdata.build_type_id != null) && (jdata.rdata.build_type_id > 0)) ? jdata.rdata.build_type_id : 0;
-                            if (lotBuildType > 0 ) {
-
-                            }
-                            else {
-
-                            }
-
                             lotStatusId = ((jdata.rdata.status_id) && (jdata.rdata.status_id != null) && (jdata.rdata.status_id > 0)) ? jdata.rdata.status_id : 179;
-
-                            if (lotStatusId > 0) {
-
-                            }
-//                            lotStatusId = ((jdata.rdata.status_id) && (jdata.rdata.status_id != null) && (jdata.rdata.status_id > 0)) ? jdata.rdata.status_id : 179;
-
                             lotTitle    = 'LSR -- Data ready for Lot: ';
                             lot_fv_install_date = jdata.rdata.fv_install_date;
                             lot_builder_date    = jdata.rdata.builder_date;
                             lot_critical_issue  = jdata.rdata.critical_issue_flag;
-                            lotPriority = jdata.rdata.priority;
+//                            lotPriority = jdata.rdata.priority;
 //                            console.log('lotShow after ajax success, assignment.. lotName: ' +lotName);
                         }
 
@@ -110,10 +122,9 @@
                             mode        = 'new';
                             lotName     = lotNumber;
                             lotNotes    = '';
-//                            lotStatusId = 179;
+                            lotStatusId = 179;
                             lotTitle    = 'LSR -- No data found. Ready to record data for Lot: ';
                             lot_critical_issue = 0;
-                            lotPriority = 0;
 //                            console.log('lotShow after ajax else, assignment.. lotName: ' +lotName);
                         }
                         $('#lot-name').val(lotName);
@@ -138,6 +149,7 @@
 
                 request.fail(function( jqXHR, textStatus ) {
                     //$('#showLotInfoLabel').text('LSR -- No data (or error) for Lot: ' +lotNumber);
+                    //alert( "Whoops! There was an error (or no initial data) processing data for Lot: " +lotNumber +". Please try again. " + textStatus );
                 });
             });
 
@@ -154,8 +166,7 @@
                     lot_verify_no_update:   $('#lot-verify-no-update').is(':checked') ? 1 : 0,
                     lot_critical_issue:     $('#lot-critical-issue').is(':checked') ? 1 : 0,
                     lot_fv_install_date:    $('#lot-fv-install-date').val(),
-                    lot_builder_date:       $('#lot-builder-date').val(),
-                    lot_priority:           $('#priority-id').val()
+                    lot_builder_date:       $('#lot-builder-date').val()
 //                    lot_fv_install_date:    $('#lot-fv-install-date').datepicker("getDate"),
 //                    lot_builder_date:       $('#lot-builder-date').datepicker("getDate")
                 }
@@ -183,37 +194,6 @@
                 event.preventDefault();
             });
 
-            $('#buildtype').on('change', function(e) {
-                var buildtype_id = e.target.value;
-                event.preventDefault();
-//                console.log('subdivision_id: ' +subdivision_id);
-                if (buildtype_id && buildtype_id != null) {
-                    var request = $.ajax({
-                        url: 'api/lotinfo/buildtype/' + buildtype_id,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (jdata) {
-                            $('#status-id').empty();
-//                            console.log('jdata.count: ' +jdata.count);
-                            if (jdata.count > 0) {
-                                $('#status-id').append("<option value='0'>Choose One....</option>");
-                                $('#status-id').prop("disabled", false);
-                                $.each(jdata.data, function (index, element) {
-                                    $('#map').append("<option value='" + element.id + "'>" + element.label + "</option>");
-                                });
-                            }
-                            else {
-                                $('#status-id').append("<option value='0'>No statuses available</option>");
-                                $('#status-id').prop('disabled', true);
-                            }
-                        }
-                    });
-                }
-                else {
-                    $('#status-id').empty();
-                }
-            });
-
             $('#showLotInfo').on('hidden.bs.modal', function(e) {
                 $('#lot-verify-no-update, #lot-critical-issue').prop('checked', false);
                 lot_critical_issue = 0;
@@ -232,7 +212,7 @@
     <img src="/img/LaytonLakesSummitTrim.jpg" name="laytonlakessummit" width="644" height="527" border="0" usemap="#summit_laytonlakes" id="laytonlakessummit" />
     <map name="summit_laytonlakes" id="summit_laytonlakes">
         @foreach($lotdefs as $lotdef)
-            <area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lot_id="{{ $lotdef->id }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />
+            <area shape="{{ $lotdef->map_area_shape }}" coords="{{ $lotdef->map_area_coords  }}" href="#" data-lotnum="{{ $lotdef->lot_num }}" data-lot_id="{{ $lotdef->id }}" data-lot_priority="{{ $lotdef->priority }}" data-toggle="modal" data-target="#showLotInfo" class="lotShow" />
         @endforeach
     </map>
     <div class="content">
@@ -291,24 +271,15 @@
                         </div>
 
                         <div class="form-group">
-                            {{--Build Type--}}
-                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                            <label for="lot-build-type" class="control-label">Build Type:</label>
-                            <select id="buildtype" class="form-control" name="buildtype_id">
-                                <option value="0">------------</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
                             {{--Status--}}
                             <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                             <label for="lot-status" class="control-label">Status:</label>
                             <select id="status-id" class="form-control">
-                                <option></option>
-                                {{--<option value="0" selected="selected">Select Status</option>--}}
-                                {{--@foreach($statusdefs as $status)--}}
-                                    {{--<option value="{{ $status->id }}">{{ $status->label }}  (duration (days)): {{ $status->days_duration }} )</option>--}}
-                                {{--@endforeach--}}
+                                <option value="0" selected="selected">------------</option>
+                                @foreach($statusdefs as $status)
+                                    <option value="{{ $status->id }}">{{ $status->label }}  (duration (days)): {{ $status->days_duration }} )</option>
+                                    {{--<option value="{{ $status->id }}">{{ $status->status_label }}  (days ou: {{ $status->days_out }} )</option>--}}
+                                @endforeach
                             </select>
                             {{--Verify no status update--}}
                             <div class="checkbox">
@@ -340,6 +311,84 @@
                         </div>
 
 
+                        {{--*******************************************************************--}}
+                        {{--<div class="input-group">--}}
+                            {{--<input class="form-control" id="fv-install-date" type="text"/>--}}
+                            {{--<div class="input-group-btn">--}}
+                                {{--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">--}}
+                                    {{--<span class="glyphicon glyphicon-calendar"></span>--}}
+                                    {{--<span class="sr-only">Toggle Calendar</span>--}}
+                                {{--</button>--}}
+                                {{--<div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">--}}
+                                    {{--<div class="datepicker-calendar">--}}
+                                        {{--<div class="datepicker-calendar-header">--}}
+                                            {{--<button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous Month</span></button>--}}
+                                            {{--<button type="button" class="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next Month</span></button>--}}
+                                            {{--<button type="button" class="title">--}}
+              {{--<span class="month">--}}
+                {{--<span data-month="0">January</span>--}}
+                {{--<span data-month="1">February</span>--}}
+                {{--<span data-month="2">March</span>--}}
+                {{--<span data-month="3">April</span>--}}
+                {{--<span data-month="4">May</span>--}}
+                {{--<span data-month="5">June</span>--}}
+                {{--<span data-month="6">July</span>--}}
+                {{--<span data-month="7">August</span>--}}
+                {{--<span data-month="8">September</span>--}}
+                {{--<span data-month="9">October</span>--}}
+                {{--<span data-month="10">November</span>--}}
+                {{--<span data-month="11">December</span>--}}
+              {{--</span> <span class="year"></span>--}}
+                                            {{--</button>--}}
+                                        {{--</div>--}}
+                                        {{--<table class="datepicker-calendar-days">--}}
+                                            {{--<thead>--}}
+                                            {{--<tr>--}}
+                                                {{--<th>Su</th>--}}
+                                                {{--<th>Mo</th>--}}
+                                                {{--<th>Tu</th>--}}
+                                                {{--<th>We</th>--}}
+                                                {{--<th>Th</th>--}}
+                                                {{--<th>Fr</th>--}}
+                                                {{--<th>Sa</th>--}}
+                                            {{--</tr>--}}
+                                            {{--</thead>--}}
+                                            {{--<tbody></tbody>--}}
+                                        {{--</table>--}}
+                                        {{--<div class="datepicker-calendar-footer">--}}
+                                            {{--<button type="button" class="datepicker-today">Today</button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="datepicker-wheels" aria-hidden="true">--}}
+                                        {{--<div class="datepicker-wheels-month">--}}
+                                            {{--<h2 class="header">Month</h2>--}}
+                                            {{--<ul>--}}
+                                                {{--<li data-month="0"><button type="button">Jan</button></li>--}}
+                                                {{--<li data-month="1"><button type="button">Feb</button></li>--}}
+                                                {{--<li data-month="2"><button type="button">Mar</button></li>--}}
+                                                {{--<li data-month="3"><button type="button">Apr</button></li>--}}
+                                                {{--<li data-month="4"><button type="button">May</button></li>--}}
+                                                {{--<li data-month="5"><button type="button">Jun</button></li>--}}
+                                                {{--<li data-month="6"><button type="button">Jul</button></li>--}}
+                                                {{--<li data-month="7"><button type="button">Aug</button></li>--}}
+                                                {{--<li data-month="8"><button type="button">Sep</button></li>--}}
+                                                {{--<li data-month="9"><button type="button">Oct</button></li>--}}
+                                                {{--<li data-month="10"><button type="button">Nov</button></li>--}}
+                                                {{--<li data-month="11"><button type="button">Dec</button></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="datepicker-wheels-year">--}}
+                                            {{--<h2 class="header">Year</h2>--}}
+                                            {{--<ul></ul>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="datepicker-wheels-footer clearfix">--}}
+                                            {{--<button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>--}}
+                                            {{--<button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 {{--*******************************************************************--}}
 
 
@@ -348,7 +397,7 @@
                             {{--Priority--}}
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                             <label for="lot-priority" class="control-label">Priority:</label>
-                            <select id="priority-id" class="form-control">
+                            <select id="priority-id" class="form-control" disabled="disabled">
                                 <option value="0" selected="selected">------------</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BuildType;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -65,13 +66,98 @@ class LotInfosController extends Controller
     }
 
     public function getLotInfo($id, LotInfo $lotInfo) {
-        $lotInfoData = $lotInfo::where('lot_id', $id)->get();
-//            ->orderBy('created_at', 'desc')
-//            ->first();
-//        $lotInfoData = $lotInfo::where('lot_id', $id)->first();
-//        $lotInfoData = $lotInfo::where('lot_id', $id)->firstOrFail();
+        $lotInfoData = $lotInfo::where('lot_id', $id)->get()->last();
 
-        return [ 'rdata' => $lotInfoData->last(), 'count' => $lotInfoData->count() ];
+
+        /***
+         *
+         * MOVE ME TO REPORT (DATA) CONTROLLER????!!!!!!????
+         *
+         **/
+        $statuses = collect(
+            StatusDef::where('build_type_id', $lotInfoData->build_type_id)->pluck('days_duration')
+        );
+        $statusCurrent  = $lotInfoData->statusdef->days_duration;
+        $statusDaysLeft = $statuses->reject(function( $value, $statusCurrent ) {
+            return $value < $statusCurrent;
+        });
+        $statusDaysRemaining = $statusDaysLeft->sum();
+
+
+        // If default build type is not zero get the status menu else do build zero stuff???
+        $buildtype  = $lotInfoData->build_type_id;
+        $statusNow  = $lotInfoData->status_id;
+
+//        $statsa = $lotInfoData->buildtype->statusmenu($buildtype, $statusNow);
+
+//        $stats      = BuildType::where('id', $buildtype)->get()->last()->statuses
+//            ->pluck('id')
+//            ->reject(function($value, $lotInfo) {
+//                return $value < $lotInfo->status_id;
+//            })
+//        ;
+//        $stats      = collect($lotInfoData->buildtype->statuses->pluck('id'));
+        $stats = StatusDef::where('build_type_id', $buildtype)->where('id', '>=', $statusNow)->get();
+//        $stats = StatusDef::where('build_type_id', $buildtype)->pluck('id');
+
+//        $statsa = $stats->filter(function($stat, $statusNow) {
+//           return $stat->where('id', '<', $statusNow);
+//        });
+//        $statsa = $stats->reject(function($value, $statusNow) {
+//           return $value < $statusNow;
+//        });
+
+//        dd($stats);
+
+
+//        $statsa = $stats->reject(function($value, $key, $statusNow) {
+//           return $value < $statusNow;
+//        });
+
+//        $statusMenu = $stats->where('id', '<', $statusNow);
+//        $stats      = $lotInfoData->buildtype->statuses->pluck('label', 'id');
+
+
+//        $stats = $stats->flip();
+//        $statusMenu = null;
+
+        // If > 0 reduce status menu to only statuses remaining ELSE display entire menu
+//        if ($buildtype > 0) {
+//            $statusMenu = $stats->reject(function($value, $statusNow) {
+//                return $value < $statusNow;
+//            });
+//        }
+
+
+        return [ 'rdata' => $lotInfoData, 'count' => $lotInfoData->count(), 'days_remaining' => $statusDaysRemaining, 'status_menu' => $stats];
+    }
+
+
+    public function loadBuildTypes() {
+
+    }
+
+    public function getStatusMenu($id) {
+        // what to do if 0???? Need definitions from Dustin!!!!
+
+        // If 0, don't do status reject and status sum??? Just display entire list? Is list just 1 "unknown" or multiple like any other build??
+
+        // Build full status menu without filtering
+        $statuses = BuildType::where('id', $id)->first()->statuses()->pluck('label', 'id');
+
+
+
+//        return
+    }
+
+    public function changeStatusMenu($id, $currentStatus, $buildType) {
+
+    }
+
+    public function buildMaps($id) {
+        $maps = LotMap::where('subdivision_id', $id)->get();
+
+        return ['data' => $maps, 'count' => $maps->count()];
     }
 
     public function store($id, Request $request, LotInfo $lotinfo, LotDef $lotdef, LotMap $lotmap) {
@@ -88,8 +174,9 @@ class LotInfosController extends Controller
         }
         $lotinfo->lot_name  = $request->lot_name;
         $lotinfo->notes     = $request->lot_notes;
-        $lotinfo->user_id = $user;
+        $lotinfo->user_id   = $user;
         $lotinfo->status_id = $request->lot_status;
+        $lotinfo->priority  = $request->lot_priority;
 //        $lotinfo->plan_num  = $request->lot_plan_num;
 //        $lotinfo->elevation = $request->lot_elevation;
 //        $lotinfo->handing   = $request->lot_handing;
